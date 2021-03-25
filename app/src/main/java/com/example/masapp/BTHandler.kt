@@ -1,30 +1,41 @@
 package com.example.masapp
 
 import android.bluetooth.*
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
+
+import android.util.Log
 import android.widget.TextView
-import androidx.core.app.ActivityCompat.startActivityForResult
-import androidx.core.content.ContextCompat.getSystemService
-import java.io.IOException
+import java.io.OutputStream
 import java.util.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+
+private const val TAG = "MainActivity"
 
 class BTHandler(var textoEstadoConexion: TextView?, activity: MainActivity) {
 
-    var bluetoothAdapter: BluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+    var bluetoothAdapter: BluetoothAdapter? = null
     lateinit var pairedDevices: Set<BluetoothDevice>
     private var bluetoothManager: BluetoothManager? = null
 
     var dispositivosEmparejados: MutableList<String> = mutableListOf()
-    var dispositivosConectados: MutableList<BluetoothDevice>  = mutableListOf()
-    val existeBT: Boolean = bluetoothAdapter != null
+
+    var existeBT: Boolean = false
+
+    private var outputStream: OutputStream? = null
 
     init{
+        textoEstadoConexion!!.text = "Buscando Adaptador..."
+        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+        existeBT = bluetoothAdapter != null
 
         if (!existeBT) {
             textoEstadoConexion!!.text = "No hay Bluetooth"
         } else {
-            textoEstadoConexion!!.text = "Desconectado"
 
             //Habilita el adaptador si está deshabilitado
             if (bluetoothAdapter?.isEnabled == false) {
@@ -36,86 +47,76 @@ class BTHandler(var textoEstadoConexion: TextView?, activity: MainActivity) {
 
 
             //Obtengo la lista de los dispositivos apareados
-            pairedDevices = bluetoothAdapter?.bondedDevices
+            textoEstadoConexion!!.text = "Buscando Dispositivos.."
+            pairedDevices = bluetoothAdapter?.bondedDevices as Set<BluetoothDevice>
             pairedDevices?.forEach { device ->
                 dispositivosEmparejados.add(device.name)
             }
 
-            //Lleno Lista de Dispositivos Conectados
-            if (bluetoothManager != null) {
-                dispositivosConectados = bluetoothManager!!.getConnectedDevices(BluetoothProfile.GATT)
-            }
-
-            //Imprimo Estado de conexion en Pantalla
-            if (dispositivosConectados != null) {
-                if (dispositivosConectados.isEmpty()){
-                    textoEstadoConexion!!.text = "Desconectado"
-                } else{
-                    textoEstadoConexion!!.text = "Conectado"
-                }
-            }
+            evaluoConectados()
         }
 
+    }
+
+    fun evaluoConectados(){
+        //Lleno Lista de Dispositivos Conectados
+        var dispositivosConectados: MutableList<BluetoothDevice>  = mutableListOf()
+        if (bluetoothManager != null) {
+            dispositivosConectados = bluetoothManager!!.getConnectedDevices(BluetoothProfile.GATT)
+        }
+        //Imprimo Estado de conexion en Pantalla
+        if (dispositivosConectados != null) {
+            if (dispositivosConectados.isEmpty()){
+                textoEstadoConexion!!.text = "Desconectado"
+            } else{
+                textoEstadoConexion!!.text = "Lista3"
+            }
+        }
+    }
+
+
+    private suspend fun connect(device:BluetoothDevice): OutputStream? {
+        return withContext(Dispatchers.IO) {
+            var outputStream: OutputStream? = null
+            if (existeBT && bluetoothAdapter!!.isEnabled) {
+                try {
+                    val bluetoothSocket = device.createRfcommSocketToServiceRecord(
+                            UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
+                    )
+                    bluetoothAdapter!!.cancelDiscovery()
+                    bluetoothSocket?.connect()
+                    if (bluetoothSocket!!.isConnected) {
+                        outputStream = bluetoothSocket!!.outputStream
+                    }
+                } catch (e: Exception){
+                    Log.d(TAG, "connect: ${e.message}")
+                }
+            }
+            outputStream
+        }
+    }
+
+
+    fun imprimir(datos: String){
+        textoEstadoConexion!!.text = "Imprimiendo"
+        outputStream?.run {
+            write(datos.toByteArray())
+            write(byteArrayOf(10))                  // Feed line
+            textoEstadoConexion!!.text = "Lista2"
+        }
     }
 
     fun conectar(posicion: Int){
         if(existeBT){
-            val hiloConexion = ConnectThread(pairedDevices!!.elementAt(posicion))
-            hiloConexion.start()
-        }
-    }
-
-    private inner class ConnectThread(device: BluetoothDevice) : Thread() {
-
-        val miUUID: UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
-        val seleccionado: BluetoothDevice = device
-
-    /*
-        private val mmSocket: BluetoothSocket? by lazy(LazyThreadSafetyMode.NONE) {
-            device.createInsecureRfcommSocketToServiceRecord(miUUID)
-        }
-*/
-        public override fun run() {
-            // Cancel discovery because it otherwise slows down the connection.
-            //bluetoothAdapter?.cancelDiscovery()
-            textoEstadoConexion!!.text = "Conect " + seleccionado.name
-            //mmSocket!!.connect()
-            /*
-            mmSocket?.use { socket ->
-                // Connect to the remote device through the socket. This call blocks
-                // until it succeeds or throws an exception.
-                socket.connect()
-
-                // The connection attempt succeeded. Perform work associated with
-                // the connection in a separate thread.
-                //manageMyConnectedSocket(socket)
-
-                textoEstadoConexion!!.text = "Conectado"
-            }
-
-
-
-            mmSocket?.connect()
-
-            if(mmSocket!!.isConnected){
-                textoEstadoConexion!!.text = "Conectado"
-            } else{
-                textoEstadoConexion!!.text = "Fallo al conectar"
-            }
-
-             */
-
-        }
-/*
-        // Closes the client socket and causes the thread to finish.
-        fun cancel() {
-            try {
-                mmSocket?.close()
-            } catch (e: IOException) {
-                //Log.e(TAG, "Could not close the client socket", e)
+            val btDevice : BluetoothDevice = pairedDevices!!.elementAt(posicion)
+            GlobalScope.launch (Dispatchers.Main) {
+                if(outputStream == null) {
+                    textoEstadoConexion!!.text = "Conectando a " + btDevice.name.take(8)
+                    outputStream = connect(btDevice)?.also {
+                        textoEstadoConexion!!.text = "Lista"
+                    }
+                }
             }
         }
-
- */
     }
 }
