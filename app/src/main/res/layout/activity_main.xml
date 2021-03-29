@@ -5,80 +5,111 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
-    <Spinner
-        android:id="@+id/Impresoras"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:background="#EC910A">
+        </com.google.android.material.tabs.TabLayout>
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tabLayout"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="20dp"
+            tools:layout_editor_absoluteX="8dp" />
+    </RelativeLayout>
 
-    <TextView
-        android:id="@+id/estadoConexion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Impresoras"
-        tools:ignore="MissingConstraints" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/botConectar"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="125dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="24dp"
-        android:fontFamily="monospace"
-        android:text="Conectar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Impresoras" />
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
+            android:stretchColumns="1">
 
-    <Button
-        android:id="@+id/botCargaE1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="128dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="24dp"
-        android:text="Cargar Etiqueta PD"
-        app:layout_constraintBottom_toTopOf="@+id/botImprimeE1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/botConectar" />
+            <TableRow
+                android:layout_width="match_parent"
+                android:background="#FFFFFF"
+                tools:ignore="UselessParent">
 
-    <Button
-        android:id="@+id/botImprimeE1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="32dp"
-        android:text="Imprimir Prueba EPD"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/botCargaE1" />
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_anchor="@+id/appBarLayout"
+                    app:layout_anchorGravity="start|top"
+                    app:srcCompat="@drawable/logomasa" />
 
-    <Button
-        android:id="@+id/botCargaLogo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="32dp"
-        android:text="Cargar Logo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/botImprimeE1" />
+                <TextView
+                    android:id="@+id/estadoConexion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="right|bottom"
+                    android:text="TextView"
+                    android:textColor="#353131"
+                    app:layout_constraintEnd_toEndOf="@+id/title"
+                    tools:ignore="MissingConstraints,RtlHardcoded" />
+
+            </TableRow>
+        </TableLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
+            android:stretchColumns="1">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:background="#FFFFFF">
+
+                <Spinner
+                    android:id="@+id/Impresoras"
+                    android:layout_width="250dp"
+                    android:layout_height="40dp"
+                    android:layout_column="0"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@android:drawable/btn_dropdown"
+                    android:spinnerMode="dialog"
+                    app:layout_constraintEnd_toStartOf="@+id/botConectar"
+                    app:layout_constraintStart_toStartOf="parent"
+
+                    tools:ignore="MissingConstraints" />
+
+                <Button
+                    android:id="@+id/botConectar"
+                    style="@android:style/Widget.Material.Light.Button.Small"
+                    android:layout_width="70dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_height="40dp"
+                    android:layout_column="1"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="monospace"
+                    android:gravity="right"
+                    android:text="@string/conectar"
+                    android:textAlignment="center"
+                    app:iconTint="@color/purple_500"
+                    app:strokeColor="#5E1CE3"
+                    tools:ignore="RtlCompat" />
+            </TableRow>
+
+        </TableLayout>
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
