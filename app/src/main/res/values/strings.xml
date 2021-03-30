@@ -1,10 +1,12 @@
 <resources>
     <string name="app_name">Masapp</string>
-    <string name="cargar_formato_predespacho">Cargar Formato Predespacho</string>
+    <string name="cargar_formato_predespacho">Cargar Formato</string>
     <string name="imprimir_prueba_predespacho">Imprimir Prueba Predespacho</string>
     <string name="conectar">Conectar</string>
     <string name="imprimir_prueba_refrigerado">Imprimir Prueba Refrigerado</string>
     <string name="imprimir_prueba_ioma">Imprimir Prueba IOMA</string>
     <string name="imprimir_prueba_pack">Imprimir Prueba Pack</string>
     <string name="cargar_formato_depacho">Cargar Formato Depacho</string>
+    <string name="horizontal">Horizontal :</string>
+    <string name="vertical">Vertical :</string>
 </resources>

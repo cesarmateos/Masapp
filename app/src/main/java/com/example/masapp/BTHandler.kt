@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 
 import android.util.Log
-import android.widget.TextView
 import java.io.OutputStream
 import java.util.*
 import kotlinx.coroutines.Dispatchers
@@ -22,11 +21,12 @@ class BTHandler(activity: MainActivity) {
     var bluetoothAdapter: BluetoothAdapter? = null
     lateinit var pairedDevices: Set<BluetoothDevice>
     private var bluetoothManager: BluetoothManager? = null
+    var btDevice : BluetoothDevice? = null
 
     var dispositivosEmparejados: MutableList<String> = mutableListOf()
 
     var existeBT: Boolean = false
-    var mandoLogo: Boolean = false
+    var logoCargado: Boolean = false
 
     private var outputStream: OutputStream? = null
 
@@ -110,11 +110,11 @@ class BTHandler(activity: MainActivity) {
 
     fun conectar(posicion: Int){
         if(existeBT){
-            val btDevice : BluetoothDevice = pairedDevices!!.elementAt(posicion)
+            btDevice = pairedDevices!!.elementAt(posicion)
             GlobalScope.launch (Dispatchers.Main) {
                 if(outputStream == null) {
-                    actividad.cambiarTexto( "Conectando a " + btDevice.name.take(8))
-                    outputStream = connect(btDevice)?.also {
+                    actividad.cambiarTexto( "Conectando a " + btDevice!!.name.take(8))
+                    outputStream = connect(btDevice!!)?.also {
                         actividad.cambiarTexto("Lista")
                     }
                 }
@@ -301,6 +301,6 @@ class BTHandler(activity: MainActivity) {
                 "<STX>u172,@@Dp\u007F_@@@;<ETX>\n" +
                 "<STX>u173,@@H@^@@@@;<ETX>\n" +
                 "<STX>R<ETX>")
-        mandoLogo = true
+        logoCargado = true
     }
 }

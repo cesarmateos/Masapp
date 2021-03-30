@@ -4,70 +4,94 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 
 class Predespacho(btHandler: BTHandler): Fragment() {
 
-    val blueTooth: BTHandler = btHandler
-    val multiplicador = 5
-    var ejeX: Int = 0
-    var ejeY: Int = 0
+    private val blueTooth: BTHandler = btHandler
+    private val multiplicador = 5
+    private var ejeX: Int = 0
+    private var ejeY: Int = 0
 
-    lateinit var textoArriba : TextView
-    lateinit var textoAbajo : TextView
-    lateinit var textoDerecha : TextView
-    lateinit var textoIzquierda : TextView
+    private lateinit var textoX : TextView
+    private lateinit var textoY : TextView
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        var vistaRetorno = inflater.inflate(R.layout.predespacho, container, false)
-        textoArriba = vistaRetorno.findViewById(R.id.textoArriba)
-        textoAbajo = vistaRetorno.findViewById(R.id.textoAbajo)
-        textoDerecha = vistaRetorno.findViewById(R.id.textoDer)
-        textoIzquierda = vistaRetorno.findViewById(R.id.textoIzq)
-        textoArriba.text = ejeX.toString()
-        textoAbajo.text = (-ejeX).toString()
-        textoDerecha.text = ejeY.toString()
-        textoIzquierda.text = (-ejeY).toString()
+        val vistaRetorno = inflater.inflate(R.layout.predespacho, container, false)
+        textoX = vistaRetorno.findViewById(R.id.PredesTextoX)
+        textoY = vistaRetorno.findViewById(R.id.PredesTextoY)
+        textoX.text = ejeX.toString()
+        textoY.text = ejeY.toString()
 
+
+        //Botón Cargar
         val botCargaE11: Button = vistaRetorno.findViewById(R.id.botCargaE11)
         botCargaE11.setOnClickListener {
-            if(!blueTooth.mandoLogo){
+            if (!blueTooth.logoCargado) {
                 blueTooth.mandarLogo()
             }
-            blueTooth.imprimir("<STX><ESC>C<ETX>\n" +
-                    "<STX><ESC>P<ETX>\n" +
-                    "<STX>E11;F11;<ETX>\n" +
-                    "<STX>U31;f3;o" + (475+ejeX*multiplicador) + "," +(35+ejeY*multiplicador)+ ";c2;w1;h1;<ETX>\n" +
-                    "<STX>H26;f3;o" + (425+ejeX*multiplicador) + "," +(62+ejeY*multiplicador)+ ";c26;b0;k6;d3,Monroe Americana<ETX>\n" +
-                    "<STX>H4;f3;o" + (465+ejeX*multiplicador) + "," +(250+ejeY*multiplicador)+ ";c26;b0;k15;d3,Ped:<ETX>\n" +
-                    "<STX>H10;f3;o" + (465+ejeX*multiplicador) + "," +(345+ejeY*multiplicador)+ ";c26;b0;k15;d0,10;<ETX>\n" +
-                    "<STX>H8;f3;o" + (465+ejeX*multiplicador) + "," +(570+ejeY*multiplicador)+ ";c26;b0;k12;d0,10;<ETX>n" +
-                    "<STX>H17;f3;o" + (370+ejeX*multiplicador) + "," +(40+ejeY*multiplicador)+ ";c26;b0;k10;d0,50;<ETX>n" +
-                    "<STX>H27;f3;o" + (290+ejeX*multiplicador) + "," +(55+ejeY*multiplicador)+ ";c26;b0;k7;d3,Entrega<ETX>n" +
-                    "<STX>H28;f3;o" + (290+ejeX*multiplicador) + "," +(235+ejeY*multiplicador)+ ";c26;b0;k7;d3,Radio<ETX>n" +
-                    "<STX>H29;f3;o" + (290+ejeX*multiplicador) + "," +(440+ejeY*multiplicador)+ ";c26;b0;k7;d3,Salida<ETX>n" +
-                    "<STX>H30;f3;o" + (290+ejeX*multiplicador) + "," +(680+ejeY*multiplicador)+ ";c26;b0;k7;d3,Orden<ETX>n" +
-                    "<STX>H21;f3;o" + (285+ejeX*multiplicador) + "," +(40+ejeY*multiplicador)+ ";c26;b0;k29;d0,30;<ETX>n" +
-                    "<STX>H13;f3;o" + (160+ejeX*multiplicador) + "," +(40+ejeY*multiplicador)+ ";c26;b0;k12;d0,26;<ETX>n" +
-                    "<STX>H15;f3;o" + (120+ejeX*multiplicador) + "," +(40+ejeY*multiplicador)+ ";c26;b0;k9;d0,26;<ETX>n" +
-                    "<STX>H16;f3;o" + (90+ejeX*multiplicador) + "," +(40+ejeY*multiplicador)+ ";c26;b0;k9;d0,26;<ETX>n" +
-                    "<STX>H12;f3;o" + (100+ejeX*multiplicador) + "," +(420+ejeY*multiplicador)+ ";c26;b0;k12;d0,10;<ETX>n" +
-                    "<STX>H6;f3;o" + (55+ejeX*multiplicador) + "," +(40+ejeY*multiplicador)+ ";c26;b0;k18;d0,16;<ETX>n" +
-                    "<STX>B11;f3;o" + (170+ejeX*multiplicador) + "," +(620+ejeY*multiplicador)+ ";c17,200,0;w11;h11;i1;d0,10;<ETX>n" +
-                    "<STX>I11;f3;o" + (30+ejeX*multiplicador) + "," +(620+ejeY*multiplicador)+ ";c20;h1;w1;b0<ETX>n" +
-                    "<STX>H25;f3;o" + (40+ejeX*multiplicador) + "," +(640+ejeY*multiplicador)+ ";c26;b0;k7;d0,30;<ETX>n" +
-                    "<STX>R<ETX>")
+            if (blueTooth.btDevice?.name?.take(4).equals("SATO")) {
+                blueTooth.imprimir("<STX><ESC>C<ETX>\n" +
+                        "<STX><ESC>P<ETX>\n" +
+                        "<STX>E11;F11;<ETX>\n" +
+                        "<STX>H38;f3;o" + (700 + ejeX * multiplicador) + "," + (40 + ejeY * multiplicador) + ";c26;b0;k6;d3,.<ETX>\n" +
+                        "<STX>U31;f3;o" + (475 + ejeX * multiplicador) + "," + (35 + ejeY * multiplicador) + ";c2;w1;h1;<ETX>\n" +
+                        "<STX>H26;f3;o" + (425 + ejeX * multiplicador) + "," + (62 + ejeY * multiplicador) + ";c26;b0;k6;d3,Monroe Americana<ETX>\n" +
+                        "<STX>H4;f3;o" + (465 + ejeX * multiplicador) + "," + (250 + ejeY * multiplicador) + ";c26;b0;k15;d3,Ped:<ETX>\n" +
+                        "<STX>H10;f3;o" + (465 + ejeX * multiplicador) + "," + (345 + ejeY * multiplicador) + ";c26;b0;k15;d0,10;<ETX>\n" +
+                        "<STX>H8;f3;o" + (465 + ejeX * multiplicador) + "," + (570 + ejeY * multiplicador) + ";c26;b0;k12;d0,10;<ETX>n" +
+                        "<STX>H17;f3;o" + (370 + ejeX * multiplicador) + "," + (40 + ejeY * multiplicador) + ";c26;b0;k10;d0,50;<ETX>n" +
+                        "<STX>H27;f3;o" + (290 + ejeX * multiplicador) + "," + (55 + ejeY * multiplicador) + ";c26;b0;k7;d3,Entrega<ETX>n" +
+                        "<STX>H28;f3;o" + (290 + ejeX * multiplicador) + "," + (235 + ejeY * multiplicador) + ";c26;b0;k7;d3,Radio<ETX>n" +
+                        "<STX>H29;f3;o" + (290 + ejeX * multiplicador) + "," + (440 + ejeY * multiplicador) + ";c26;b0;k7;d3,Salida<ETX>n" +
+                        "<STX>H30;f3;o" + (290 + ejeX * multiplicador) + "," + (680 + ejeY * multiplicador) + ";c26;b0;k7;d3,Orden<ETX>n" +
+                        "<STX>H21;f3;o" + (285 + ejeX * multiplicador) + "," + (40 + ejeY * multiplicador) + ";c26;b0;k29;d0,30;<ETX>n" +
+                        "<STX>H13;f3;o" + (160 + ejeX * multiplicador) + "," + (40 + ejeY * multiplicador) + ";c26;b0;k12;d0,26;<ETX>n" +
+                        "<STX>H15;f3;o" + (120 + ejeX * multiplicador) + "," + (40 + ejeY * multiplicador) + ";c26;b0;k9;d0,26;<ETX>n" +
+                        "<STX>H16;f3;o" + (90 + ejeX * multiplicador) + "," + (40 + ejeY * multiplicador) + ";c26;b0;k9;d0,26;<ETX>n" +
+                        "<STX>H12;f3;o" + (100 + ejeX * multiplicador) + "," + (420 + ejeY * multiplicador) + ";c26;b0;k12;d0,10;<ETX>n" +
+                        "<STX>H6;f3;o" + (55 + ejeX * multiplicador) + "," + (40 + ejeY * multiplicador) + ";c26;b0;k18;d0,16;<ETX>n" +
+                        "<STX>B11;f3;o" + (170 + ejeX * multiplicador) + "," + (620 + ejeY * multiplicador) + ";c17,200,0;w11;h11;i1;d0,10;<ETX>n" +
+                        "<STX>I11;f3;o" + (30 + ejeX * multiplicador) + "," + (620 + ejeY * multiplicador) + ";c20;h1;w1;b0<ETX>n" +
+                        "<STX>H25;f3;o" + (40 + ejeX * multiplicador) + "," + (640 + ejeY * multiplicador) + ";c26;b0;k7;d0,30;<ETX>n" +
+                        "<STX>R<ETX>")
+            } else {
+                blueTooth.imprimir("<STX><ESC>C<ETX>\n" +
+                        "<STX><ESC>P<ETX>\n" +
+                        "<STX>E11;F11;<ETX>\n" +
+                        "<STX>U31;f3;o" + (475 + ejeX * multiplicador) + "," + (35 + ejeY * multiplicador) + ";c2;w1;h1;<ETX>\n" +
+                        "<STX>H26;f3;o" + (425 + ejeX * multiplicador) + "," + (62 + ejeY * multiplicador) + ";c26;b0;k6;d3,Monroe Americana<ETX>\n" +
+                        "<STX>H4;f3;o" + (465 + ejeX * multiplicador) + "," + (250 + ejeY * multiplicador) + ";c26;b0;k15;d3,Ped:<ETX>\n" +
+                        "<STX>H10;f3;o" + (465 + ejeX * multiplicador) + "," + (345 + ejeY * multiplicador) + ";c26;b0;k15;d0,10;<ETX>\n" +
+                        "<STX>H8;f3;o" + (465 + ejeX * multiplicador) + "," + (570 + ejeY * multiplicador) + ";c26;b0;k12;d0,10;<ETX>n" +
+                        "<STX>H17;f3;o" + (370 + ejeX * multiplicador) + "," + (40 + ejeY * multiplicador) + ";c26;b0;k10;d0,50;<ETX>n" +
+                        "<STX>H27;f3;o" + (290 + ejeX * multiplicador) + "," + (55 + ejeY * multiplicador) + ";c26;b0;k7;d3,Entrega<ETX>n" +
+                        "<STX>H28;f3;o" + (290 + ejeX * multiplicador) + "," + (235 + ejeY * multiplicador) + ";c26;b0;k7;d3,Radio<ETX>n" +
+                        "<STX>H29;f3;o" + (290 + ejeX * multiplicador) + "," + (440 + ejeY * multiplicador) + ";c26;b0;k7;d3,Salida<ETX>n" +
+                        "<STX>H30;f3;o" + (290 + ejeX * multiplicador) + "," + (680 + ejeY * multiplicador) + ";c26;b0;k7;d3,Orden<ETX>n" +
+                        "<STX>H21;f3;o" + (285 + ejeX * multiplicador) + "," + (40 + ejeY * multiplicador) + ";c26;b0;k29;d0,30;<ETX>n" +
+                        "<STX>H13;f3;o" + (160 + ejeX * multiplicador) + "," + (40 + ejeY * multiplicador) + ";c26;b0;k12;d0,26;<ETX>n" +
+                        "<STX>H15;f3;o" + (120 + ejeX * multiplicador) + "," + (40 + ejeY * multiplicador) + ";c26;b0;k9;d0,26;<ETX>n" +
+                        "<STX>H16;f3;o" + (90 + ejeX * multiplicador) + "," + (40 + ejeY * multiplicador) + ";c26;b0;k9;d0,26;<ETX>n" +
+                        "<STX>H12;f3;o" + (100 + ejeX * multiplicador) + "," + (420 + ejeY * multiplicador) + ";c26;b0;k12;d0,10;<ETX>n" +
+                        "<STX>H6;f3;o" + (55 + ejeX * multiplicador) + "," + (40 + ejeY * multiplicador) + ";c26;b0;k18;d0,16;<ETX>n" +
+                        "<STX>B11;f3;o" + (170 + ejeX * multiplicador) + "," + (620 + ejeY * multiplicador) + ";c17,200,0;w11;h11;i1;d0,10;<ETX>n" +
+                        "<STX>I11;f3;o" + (30 + ejeX * multiplicador) + "," + (620 + ejeY * multiplicador) + ";c20;h1;w1;b0<ETX>n" +
+                        "<STX>H25;f3;o" + (40 + ejeX * multiplicador) + "," + (640 + ejeY * multiplicador) + ";c26;b0;k7;d0,30;<ETX>n" +
+                        "<STX>R<ETX>")
+            }
         }
 
         //Botón Imprimir
         val botImprimeE11: Button = vistaRetorno.findViewById(R.id.botImprimeE11)
         botImprimeE11.setOnClickListener {
-            if(!blueTooth.mandoLogo){
+            if(!blueTooth.logoCargado){
                 blueTooth.mandarLogo()
             }
             blueTooth.imprimir("<STX>R<ETX>\n" +
@@ -85,19 +109,19 @@ class Predespacho(btHandler: BTHandler): Fragment() {
                     "<STX><RS>1<ETB><FF><ETX>")
         }
 
-        val botArriba: Button = vistaRetorno.findViewById(R.id.botArriba)
+        val botArriba: ImageButton = vistaRetorno.findViewById(R.id.PredesBotArriba)
         botArriba.setOnClickListener {
             modificarX(1)
         }
-        val botAbajo: Button = vistaRetorno.findViewById(R.id.botAbajo)
+        val botAbajo: ImageButton = vistaRetorno.findViewById(R.id.PredesBotAbajo)
         botAbajo.setOnClickListener {
             modificarX(-1)
         }
-        val botDerecha: Button = vistaRetorno.findViewById(R.id.botDer)
+        val botDerecha: ImageButton = vistaRetorno.findViewById(R.id.PredesBotDer)
         botDerecha.setOnClickListener {
             modificarY(1)
         }
-        val botIzquierda: Button = vistaRetorno.findViewById(R.id.botIzq)
+        val botIzquierda: ImageButton = vistaRetorno.findViewById(R.id.PredesBotIzq)
         botIzquierda.setOnClickListener {
             modificarY(-1)
         }
@@ -105,15 +129,13 @@ class Predespacho(btHandler: BTHandler): Fragment() {
         return vistaRetorno
     }
 
-    fun modificarX(cantidad: Int){
+    private fun modificarX(cantidad: Int){
         ejeX += cantidad
-        textoArriba.text = ejeX.toString()
-        textoAbajo.text = (-ejeX).toString()
+        textoX.text = ejeX.toString()
     }
 
-    fun modificarY(cantidad: Int){
+    private fun modificarY(cantidad: Int){
         ejeY += cantidad
-        textoDerecha.text = ejeY.toString()
-        textoIzquierda.text = (-ejeY).toString()
+        textoY.text = ejeY.toString()
     }
 }

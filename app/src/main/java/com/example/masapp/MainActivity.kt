@@ -1,6 +1,5 @@
 package com.example.masapp
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -11,9 +10,9 @@ import com.google.android.material.tabs.TabLayout
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var tabLayout: TabLayout
+    private lateinit var tabLayout: TabLayout
     lateinit var viewPager: ViewPager
-    lateinit var textoEstadoConexion : TextView
+    private lateinit var textoEstadoConexion : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
         textoEstadoConexion = findViewById(R.id.estadoConexion) as TextView
 
-        var btHandler: BTHandler = BTHandler(this)
+        val btHandler: BTHandler = BTHandler(this)
         var posicionListaImpresora: Int = 0;
 
         tabLayout = findViewById(R.id.tabLayout)

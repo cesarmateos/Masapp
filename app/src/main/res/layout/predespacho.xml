@@ -4,134 +4,151 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:backgroundTint="#FF9800">
 
     <Button
         android:id="@+id/botCargaE11"
-        android:layout_width="match_parent"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="0dp"
+        android:backgroundTint="#9C7D73"
+        android:fontFamily="monospace"
+        android:text="@string/cargar_formato_predespacho"
+        android:textColor="#F8F8F8"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PredesBotArriba"
+        tools:ignore="MissingConstraints" />
+
+    <ImageButton
+        android:id="@+id/PredesBotArriba"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@drawable/boton_redondeado"
+        android:contentDescription="Subir"
+        android:gravity="center"
+        android:rotation="270"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_flechamia"
+        tools:ignore="MissingConstraints" />
+
+
+    <ImageButton
+        android:id="@+id/PredesBotAbajo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="0dp"
+        android:background="@drawable/boton_redondeado"
+        android:contentDescription="Bajar"
+        android:rotation="90"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/botCargaE11"
+        app:srcCompat="@drawable/ic_flechamia"
+        tools:ignore="MissingConstraints" />
+
+
+    <ImageButton
+        android:id="@+id/PredesBotIzq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/boton_redondeado"
+        android:contentDescription="Mover Izquierda"
+        android:rotation="180"
+        app:layout_constraintEnd_toStartOf="@+id/botCargaE11"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_flechamia"
+        tools:ignore="MissingConstraints" />
+
+    <ImageButton
+        android:id="@+id/PredesBotDer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="70dp"
+        android:background="@drawable/boton_redondeado"
+        android:contentDescription="Mover Derecha"
+        app:layout_constraintStart_toEndOf="@+id/botCargaE11"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_flechamia"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/PredesEjeYText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/horizontal"
+        android:textColor="#514D46"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PredesBotAbajo"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/PredesTextoY"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="0dp"
-        android:padding="8dp"
-        android:text="@string/cargar_formato_predespacho"
+        android:text="TextView"
+        android:textColor="#514D46"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/PredesEjeYText"
+        app:layout_constraintTop_toBottomOf="@+id/PredesBotAbajo"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/PredesTextoX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="TextView"
+        android:textColor="#514D46"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/PredesTextoY"
+        app:layout_constraintTop_toBottomOf="@+id/PredesTextoY"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/PredesEjeXText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="2dp"
+        android:text="@string/vertical"
+        android:textColor="#514D46"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PredesEjeYText"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/botImprimeE11"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:backgroundTint="#9C7D73"
+        android:textColor="#F8F8F8"
         android:padding="8dp"
         android:text="@string/imprimir_prueba_predespacho"
-        app:layout_constraintTop_toBottomOf="@id/botCargaE11"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/botArriba"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="161dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="162dp"
-        android:layout_marginBottom="32dp"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/botAbajo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textoArriba"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/botAbajo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="161dp"
-        android:layout_marginTop="34dp"
-        android:layout_marginEnd="162dp"
-        android:layout_marginBottom="8dp"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/textoAbajo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/botArriba"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/textoArriba"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="174dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="179dp"
-        android:layout_marginBottom="8dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/botArriba"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/botImprimeE11"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/textoAbajo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="169dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="184dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/botAbajo"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/botIzq"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="99dp"
-        android:rotation="270"
-        android:text="Button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/botImprimeE11" />
-
-    <Button
-        android:id="@+id/botDer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="102dp"
-        android:layout_marginEnd="41dp"
-        android:rotation="90"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/botImprimeE11" />
-
-    <TextView
-        android:id="@+id/textoIzq"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="49dp"
-        android:layout_marginTop="12dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/botIzq"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/textoDer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="41dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/botDer"
+        app:layout_constraintTop_toBottomOf="@+id/PredesTextoX"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
