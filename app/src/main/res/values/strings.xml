@@ -1,12 +1,13 @@
 <resources>
-    <string name="app_name">Masapp</string>
+    <string name="app_name">MASApp</string>
     <string name="cargar_formato_predespacho">Cargar Formato</string>
-    <string name="imprimir_prueba_predespacho">Imprimir Prueba Predespacho</string>
+    <string name="imprimir_prueba_predespacho_continuo">Cargar formato para Papel Continuo e Imprimir Prueba </string>
+    <string name="imprimir_prueba_predespacho_etiqueta">Cargar formato para Etiqueta Autoadhesiva e Imprimir Prueba</string>
     <string name="conectar">Conectar</string>
     <string name="imprimir_prueba_refrigerado">Imprimir Prueba Refrigerado</string>
     <string name="imprimir_prueba_ioma">Imprimir Prueba IOMA</string>
     <string name="imprimir_prueba_pack">Imprimir Prueba Pack</string>
-    <string name="cargar_formato_depacho">Cargar Formato Depacho</string>
+    <string name="cargar_formato_depacho">Cargar Formato</string>
     <string name="horizontal">Horizontal :</string>
     <string name="vertical">Vertical :</string>
 </resources>

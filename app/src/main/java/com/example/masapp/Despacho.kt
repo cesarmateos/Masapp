@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 class Despacho(btHandler: BTHandler):Fragment() {
 
     private val blueTooth: BTHandler = btHandler
-    private val multiplicador = 5
+    private val multiplicador = 3
     private var ejeX: Int = 0
     private var ejeY: Int = 0
 

@@ -12,7 +12,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginTop="0dp"
-        android:backgroundTint="#9C7D73"
+        android:backgroundTint="@color/botones"
         android:fontFamily="monospace"
         android:text="@string/cargar_formato_predespacho"
         android:textColor="#F8F8F8"
@@ -28,14 +28,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="0dp"
-        android:background="@drawable/boton_redondeado"
+        android:background="@drawable/selector_boton_redondeado"
         android:contentDescription="Subir"
         android:gravity="center"
         android:rotation="270"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_flechamia"
+        app:srcCompat="@drawable/ic_masapp_flecha"
         tools:ignore="MissingConstraints" />
 
 
@@ -45,13 +45,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="0dp"
-        android:background="@drawable/boton_redondeado"
+        android:background="@drawable/selector_boton_redondeado"
         android:contentDescription="Bajar"
         android:rotation="90"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/botCargaE1"
-        app:srcCompat="@drawable/ic_flechamia"
+        app:srcCompat="@drawable/ic_masapp_flecha"
         tools:ignore="MissingConstraints" />
 
 
@@ -61,12 +61,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
         android:layout_marginEnd="10dp"
-        android:background="@drawable/boton_redondeado"
+        android:background="@drawable/selector_boton_redondeado"
         android:contentDescription="Mover Izquierda"
         android:rotation="180"
         app:layout_constraintEnd_toStartOf="@+id/botCargaE1"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_flechamia"
+        app:srcCompat="@drawable/ic_masapp_flecha"
         tools:ignore="MissingConstraints" />
 
     <ImageButton
@@ -75,11 +75,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="70dp"
-        android:background="@drawable/boton_redondeado"
+        android:background="@drawable/selector_boton_redondeado"
         android:contentDescription="Mover Derecha"
         app:layout_constraintStart_toEndOf="@+id/botCargaE1"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_flechamia"
+        app:srcCompat="@drawable/ic_masapp_flecha"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -143,7 +143,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
-        android:backgroundTint="#9C7D73"
+        android:backgroundTint="@color/botones"
         android:textColor="#F8F8F8"
         android:padding="8dp"
         android:text="@string/imprimir_prueba_pack"
@@ -159,7 +159,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="2dp"
         android:layout_marginEnd="24dp"
-        android:backgroundTint="#9C7D73"
+        android:backgroundTint="@color/botones"
         android:textColor="#F8F8F8"
         android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -175,7 +175,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="2dp"
         android:layout_marginEnd="24dp"
-        android:backgroundTint="#9C7D73"
+        android:backgroundTint="@color/botones"
         android:textColor="#F8F8F8"
         android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"

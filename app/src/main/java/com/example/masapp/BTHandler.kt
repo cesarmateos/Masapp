@@ -51,7 +51,7 @@ class BTHandler(activity: MainActivity) {
             //Obtengo la lista de los dispositivos apareados
             actividad.cambiarTexto("Buscando Dispositivos..")
             pairedDevices = bluetoothAdapter?.bondedDevices as Set<BluetoothDevice>
-            pairedDevices?.forEach { device ->
+            pairedDevices.forEach { device ->
                 dispositivosEmparejados.add(device.name)
             }
 
@@ -67,12 +67,10 @@ class BTHandler(activity: MainActivity) {
             dispositivosConectados = bluetoothManager!!.getConnectedDevices(BluetoothProfile.GATT)
         }
         //Imprimo Estado de conexion en Pantalla
-        if (dispositivosConectados != null) {
-            if (dispositivosConectados.isEmpty()){
-                actividad.cambiarTexto("Desconectado")
-            } else{
-                actividad.cambiarTexto("Lista")
-            }
+        if (dispositivosConectados.isEmpty()){
+            actividad.cambiarTexto("Desconectado")
+        } else{
+            actividad.cambiarTexto("Lista")
         }
     }
 
@@ -88,7 +86,7 @@ class BTHandler(activity: MainActivity) {
                     bluetoothAdapter!!.cancelDiscovery()
                     bluetoothSocket?.connect()
                     if (bluetoothSocket!!.isConnected) {
-                        outputStream = bluetoothSocket!!.outputStream
+                        outputStream = bluetoothSocket.outputStream
                     }
                 } catch (e: Exception){
                     Log.d(TAG, "connect: ${e.message}")
@@ -100,17 +98,19 @@ class BTHandler(activity: MainActivity) {
 
 
     fun imprimir(datos: String){
-        actividad.cambiarTexto("Imprimiendo")
-        outputStream?.run {
-            write(datos.toByteArray())
-            write(byteArrayOf(10))                  // Feed line
-            actividad.cambiarTexto("Lista")
+        if (existeBT) {
+            actividad.cambiarTexto("Enviando datos..")
+            outputStream?.run {
+                write(datos.toByteArray())
+                write(byteArrayOf(10))                  // Feed line
+                actividad.cambiarTexto("Lista")
+            }
         }
     }
 
     fun conectar(posicion: Int){
         if(existeBT){
-            btDevice = pairedDevices!!.elementAt(posicion)
+            btDevice = pairedDevices.elementAt(posicion)
             GlobalScope.launch (Dispatchers.Main) {
                 if(outputStream == null) {
                     actividad.cambiarTexto( "Conectando a " + btDevice!!.name.take(8))

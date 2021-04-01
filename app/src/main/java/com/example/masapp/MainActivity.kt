@@ -62,13 +62,20 @@ class MainActivity : AppCompatActivity() {
         }
 
         //Botón Conectar
-        val button: Button = findViewById(R.id.botConectar)
-        button.setOnClickListener {
+        val botonConectar: Button = findViewById(R.id.botConectar)
+        botonConectar.setOnClickListener {
             btHandler.conectar(posicionListaImpresora)
+        }
+
+        //Botón exit
+        val botonExit: ImageButton = findViewById(R.id.cerrar)
+        botonExit.setOnClickListener {
+            finish()
+            System.exit(0)
         }
     }
 
     fun cambiarTexto(texto: String){
-        textoEstadoConexion?.text  = texto
+        textoEstadoConexion.text = texto
     }
 }

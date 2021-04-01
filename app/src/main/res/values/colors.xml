@@ -7,4 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gris">#D1D1D1</color>
+    <color name="tabRaya">#76608A</color>
+    <color name="tabTextSeleccion">#76608A</color>
+    <color name="tabTextNoSeleccion">#FFFFFF</color>
+    <color name="tabSeleccion">#e9d1ff</color>
+    <color name="tabNoSeleccion">#DBDBDB</color>
+    <color name="botones">#76608A</color>
 </resources>

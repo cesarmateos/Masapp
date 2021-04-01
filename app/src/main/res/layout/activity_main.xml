@@ -14,16 +14,21 @@
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
-            android:background="#EC910A"
-            app:tabTextAppearance="@style/TextAppearance.AppCompat.Body1"></com.google.android.material.tabs.TabLayout>
+            android:layout_marginTop="85dp"
+            app:tabBackground="@drawable/selector_tabs"
+            android:textAlignment="center"
+            app:tabSelectedTextColor="@color/tabTextSeleccion"
+            app:tabTextColor="@color/tabTextNoSeleccion"
+            app:tabIndicatorColor="@color/tabRaya"
+            app:tabIndicatorHeight="4dp"
+            app:tabTextAppearance="@style/TextAppearance.AppCompat.Large" />
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tabLayout"
             android:layout_centerInParent="true"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             tools:layout_editor_absoluteX="8dp" />
     </RelativeLayout>
 
@@ -57,12 +62,21 @@
                     android:layout_height="wrap_content"
                     android:layout_column="1"
                     android:layout_marginTop="20dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="10dp"
                     android:gravity="right|bottom"
                     android:text="TextView"
                     android:textColor="#353131"
                     app:layout_constraintEnd_toEndOf="@+id/title"
                     tools:ignore="MissingConstraints,RtlHardcoded" />
+
+                <ImageButton
+                    android:id="@+id/cerrar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/selector_boton_exit"
+                    app:srcCompat="@drawable/ic_exit_x" />
 
             </TableRow>
         </TableLayout>
@@ -79,33 +93,31 @@
 
                 <Spinner
                     android:id="@+id/Impresoras"
-                    android:layout_width="250dp"
+                    android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_column="0"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="0dp"
+                    android:layout_marginTop="1dp"
                     android:layout_marginEnd="8dp"
                     android:background="@android:drawable/btn_dropdown"
                     android:spinnerMode="dialog"
                     app:layout_constraintEnd_toStartOf="@+id/botConectar"
                     app:layout_constraintStart_toStartOf="parent"
-
                     tools:ignore="MissingConstraints" />
 
                 <Button
                     android:id="@+id/botConectar"
                     style="@android:style/Widget.Material.Light.Button.Small"
-                    android:layout_width="70dp"
-                    android:layout_marginTop="0dp"
-                    android:layout_height="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
                     android:layout_column="1"
+                    android:layout_marginTop="0dp"
                     android:layout_marginEnd="8dp"
                     android:fontFamily="monospace"
                     android:gravity="right"
                     android:text="@string/conectar"
                     android:textAlignment="center"
-                    app:iconTint="@color/purple_500"
-                    app:strokeColor="#5E1CE3"
+                    android:textColorHighlight="#673AB7"
                     tools:ignore="RtlCompat" />
             </TableRow>
 
