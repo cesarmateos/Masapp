@@ -1,4 +1,5 @@
 package com.example.masapp
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,8 @@ class Despacho(btHandler: BTHandler):Fragment() {
     private lateinit var textoX : TextView
     private lateinit var textoY : TextView
 
+    private var huboCambios: Boolean = true
+
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -29,12 +32,90 @@ class Despacho(btHandler: BTHandler):Fragment() {
         textoX.text = ejeX.toString()
         textoY.text = ejeY.toString()
 
-        //Botón cargar etiqueta1
-        val botCargaE1: Button = vistaRetorno.findViewById(R.id.botCargaE1)
-        botCargaE1.setOnClickListener {
-            if(!blueTooth.logoCargado){
-                blueTooth.mandarLogo()
-            }
+
+        //Botón Imprimir Pack
+        val botImprimePack: Button = vistaRetorno.findViewById(R.id.botImprimePack)
+        botImprimePack.setOnClickListener {
+            cargarFormato()
+            blueTooth.imprimir("<STX>R<ETX> \n" +
+                    "<STX><ESC>E1<CAN><ETX>\n" +
+                    "<STX><ESC>F6<DEL>Bulto 351874129<ETX>\n" +
+                    "<STX><ESC>F8<DEL>11/02/2021<ETX>\n" +
+                    "<STX><ESC>F10<DEL>1<ETX>\n" +
+                    "<STX><ESC>F11<DEL>09663168<ETX>\n" +
+                    "<STX><ESC>F12<DEL>( 5113101)<ETX>\n" +
+                    "<STX><ESC>F13<DEL>FCIA. NOBEL ESPERANZA<ETX>\n" +
+                    "<STX><ESC>F15<DEL>TAFIROL 500MG                <ETX>\n" +
+                    "<STX><ESC>F16<DEL>EXHIB. X10X40 BLISTERS<ETX>\n" +
+                    "<STX><ESC>F17<DEL>2   (Desc  1) [ #E1C16]<ETX>\n" +
+                    "<STX><ESC>F21<DEL>0001   11/02  A1 14:10   025<ETX>\n" +
+                    "<STX><ESC>F25<DEL>Fal. 0/ 2<ETX>\n" +
+                    "<STX><RS>1<ETB><FF><ETX>")
+        }
+
+        val botImprimeRef: Button = vistaRetorno.findViewById(R.id.botImprimeRef)
+        botImprimeRef.setOnClickListener {
+            cargarFormato()
+            blueTooth.imprimir("<STX>R<ETX> \n" +
+                    "<STX><ESC>E1<CAN><ETX>\n" +
+                    "<STX><ESC>F6<DEL>Etiq. de DESPACHO<ETX>\n" +
+                    "<STX><ESC>F8<DEL>17/03/2021<ETX>\n" +
+                    "<STX><ESC>F10<DEL>1169<ETX>\n" +
+                    "<STX><ESC>F11<DEL>0351014150<ETX>\n" +
+                    "<STX><ESC>F12<DEL>( 1472101)<ETX>\n" +
+                    "<STX><ESC>F13<DEL>DESCALZI <ETX>\n" +
+                    "<STX><ESC>F15<DEL>Estrada 2500              <ETX>\n" +
+                    "<STX><ESC>F16<DEL>Villa Maipu<ETX>\n" +
+                    "<STX><ESC>F17<DEL>***PRODUCTOS A REFRIGERAR ENTRE 2 y 8 GRADOS<ETX>\n" +
+                    "<STX><ESC>F21<DEL>0001   17/03  U7 23:40   007<ETX>\n" +
+                    "<STX><RS>1<ETB><FF><ETX>")
+        }
+
+        val botImprimeIOMA: Button = vistaRetorno.findViewById(R.id.botImprimeIOMA)
+        botImprimeIOMA.setOnClickListener {
+            cargarFormato()
+            blueTooth.imprimir("<STX>R<ETX> \n" +
+                    "<STX><ESC>E1<CAN><ETX>\n" +
+                    "<STX><ESC>F6<DEL>Etiq. de DESPACHO<ETX>\n" +
+                    "<STX><ESC>F8<DEL>18/03/2021<ETX>\n" +
+                    "<STX><ESC>F10<DEL>1871<ETX>\n" +
+                    "<STX><ESC>F11<DEL>0351020723<ETX>\n" +
+                    "<STX><ESC>F12<DEL>( INIO)<ETX>\n" +
+                    "<STX><ESC>F13<DEL>AMARTINO<ETX>\n" +
+                    "<STX><ESC>F15<DEL>O ROARKE 2408<ETX>\n" +
+                    "<STX><ESC>F16<DEL>BARADERO<ETX>\n" +
+                    "<STX><ESC>F17<DEL>*                             <ETX>\n" +
+                    "<STX><ESC>F21<DEL>0001   18/03  V2 23:58   002<ETX>\n" +
+                    "<STX><ESC>F25<DEL>BUSCEMI FRAN<ETX>\n" +
+                    "<STX><RS>1<ETB><FF><ETX>")
+        }
+
+        //Botonera Cursores
+        val botArriba: ImageButton = vistaRetorno.findViewById(R.id.DesBotArriba)
+        botArriba.setOnClickListener {
+            modificarX(1)
+        }
+        val botAbajo: ImageButton = vistaRetorno.findViewById(R.id.DesBotAbajo)
+        botAbajo.setOnClickListener {
+            modificarX(-1)
+        }
+        val botDerecha: ImageButton = vistaRetorno.findViewById(R.id.DesBotDer)
+        botDerecha.setOnClickListener {
+            modificarY(1)
+        }
+        val botIzquierda: ImageButton = vistaRetorno.findViewById(R.id.DesBotIzq)
+        botIzquierda.setOnClickListener {
+            modificarY(-1)
+        }
+
+        return vistaRetorno
+    }
+
+    private fun cargarFormato(){
+        if(!blueTooth.logoCargado){
+            blueTooth.mandarLogo()
+        }
+        if(this.huboCambios){
             if (blueTooth.btDevice?.name?.take(3).equals("RP4")) {
                 blueTooth.imprimir("<STX><ESC>C<ETX>\n" +
                         "<STX><ESC>P<ETX>\n" +
@@ -84,98 +165,21 @@ class Despacho(btHandler: BTHandler):Fragment() {
                         "<STX>H12;f3;o" + (30+ejeX*multiplicador) + "," +(50+ejeY*multiplicador)+ ";c26;b0;k10;d0,10;<ETX>\n" +
                         "<STX>R<ETX>")
             }
+            huboCambios = false
         }
 
-        //Botón Imprimir
-        val botImprimePack: Button = vistaRetorno.findViewById(R.id.botImprimePack)
-        botImprimePack.setOnClickListener {
-            if(!blueTooth.logoCargado){
-                blueTooth.mandarLogo()
-            }
-            blueTooth.imprimir("<STX>R<ETX> \n" +
-                    "<STX><ESC>E1<CAN><ETX>\n" +
-                    "<STX><ESC>F6<DEL>Bulto 351874129<ETX>\n" +
-                    "<STX><ESC>F8<DEL>11/02/2021<ETX>\n" +
-                    "<STX><ESC>F10<DEL>1<ETX>\n" +
-                    "<STX><ESC>F11<DEL>09663168<ETX>\n" +
-                    "<STX><ESC>F12<DEL>( 5113101)<ETX>\n" +
-                    "<STX><ESC>F13<DEL>FCIA. NOBEL ESPERANZA<ETX>\n" +
-                    "<STX><ESC>F15<DEL>TAFIROL 500MG                <ETX>\n" +
-                    "<STX><ESC>F16<DEL>EXHIB. X10X40 BLISTERS<ETX>\n" +
-                    "<STX><ESC>F17<DEL>2   (Desc  1) [ #E1C16]<ETX>\n" +
-                    "<STX><ESC>F21<DEL>0001   11/02  A1 14:10   025<ETX>\n" +
-                    "<STX><ESC>F25<DEL>Fal. 0/ 2<ETX>\n" +
-                    "<STX><RS>1<ETB><FF><ETX>")
-        }
-
-        val botImprimeRef: Button = vistaRetorno.findViewById(R.id.botImprimeRef)
-        botImprimeRef.setOnClickListener {
-            if(!blueTooth.logoCargado){
-                blueTooth.mandarLogo()
-            }
-            blueTooth.imprimir("<STX>R<ETX> \n" +
-                    "<STX><ESC>E1<CAN><ETX>\n" +
-                    "<STX><ESC>F6<DEL>Etiq. de DESPACHO<ETX>\n" +
-                    "<STX><ESC>F8<DEL>17/03/2021<ETX>\n" +
-                    "<STX><ESC>F10<DEL>1169<ETX>\n" +
-                    "<STX><ESC>F11<DEL>0351014150<ETX>\n" +
-                    "<STX><ESC>F12<DEL>( 1472101)<ETX>\n" +
-                    "<STX><ESC>F13<DEL>DESCALZI <ETX>\n" +
-                    "<STX><ESC>F15<DEL>Estrada 2500              <ETX>\n" +
-                    "<STX><ESC>F16<DEL>Villa Maipu<ETX>\n" +
-                    "<STX><ESC>F17<DEL>***PRODUCTOS A REFRIGERAR ENTRE 2 y 8 GRADOS<ETX>\n" +
-                    "<STX><ESC>F21<DEL>0001   17/03  U7 23:40   007<ETX>\n" +
-                    "<STX><RS>1<ETB><FF><ETX>")
-        }
-
-        val botImprimeIOMA: Button = vistaRetorno.findViewById(R.id.botImprimeIOMA)
-        botImprimeIOMA.setOnClickListener {
-            if(!blueTooth.logoCargado){
-                blueTooth.mandarLogo()
-            }
-            blueTooth.imprimir("<STX>R<ETX> \n" +
-                    "<STX><ESC>E1<CAN><ETX>\n" +
-                    "<STX><ESC>F6<DEL>Etiq. de DESPACHO<ETX>\n" +
-                    "<STX><ESC>F8<DEL>18/03/2021<ETX>\n" +
-                    "<STX><ESC>F10<DEL>1871<ETX>\n" +
-                    "<STX><ESC>F11<DEL>0351020723<ETX>\n" +
-                    "<STX><ESC>F12<DEL>( INIO)<ETX>\n" +
-                    "<STX><ESC>F13<DEL>AMARTINO<ETX>\n" +
-                    "<STX><ESC>F15<DEL>O ROARKE 2408<ETX>\n" +
-                    "<STX><ESC>F16<DEL>BARADERO<ETX>\n" +
-                    "<STX><ESC>F17<DEL>*                             <ETX>\n" +
-                    "<STX><ESC>F21<DEL>0001   18/03  V2 23:58   002<ETX>\n" +
-                    "<STX><ESC>F25<DEL>BUSCEMI FRAN<ETX>\n" +
-                    "<STX><RS>1<ETB><FF><ETX>")
-        }
-
-        val botArriba: ImageButton = vistaRetorno.findViewById(R.id.DesBotArriba)
-        botArriba.setOnClickListener {
-            modificarX(1)
-        }
-        val botAbajo: ImageButton = vistaRetorno.findViewById(R.id.DesBotAbajo)
-        botAbajo.setOnClickListener {
-            modificarX(-1)
-        }
-        val botDerecha: ImageButton = vistaRetorno.findViewById(R.id.DesBotDer)
-        botDerecha.setOnClickListener {
-            modificarY(1)
-        }
-        val botIzquierda: ImageButton = vistaRetorno.findViewById(R.id.DesBotIzq)
-        botIzquierda.setOnClickListener {
-            modificarY(-1)
-        }
-
-        return vistaRetorno
     }
 
-    fun modificarX(cantidad: Int){
+    private fun modificarX(cantidad: Int){
         ejeX += cantidad
         textoX.text = ejeX.toString()
+        huboCambios = true
     }
 
-    fun modificarY(cantidad: Int){
+    private fun modificarY(cantidad: Int){
         ejeY += cantidad
         textoY.text = ejeY.toString()
+        huboCambios = true
     }
+
 }

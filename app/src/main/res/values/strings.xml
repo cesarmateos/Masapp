@@ -1,13 +1,23 @@
 <resources>
     <string name="app_name">MASApp</string>
-    <string name="cargar_formato_predespacho">Cargar Formato</string>
-    <string name="imprimir_prueba_predespacho_continuo">Cargar formato para Papel Continuo e Imprimir Prueba </string>
-    <string name="imprimir_prueba_predespacho_etiqueta">Cargar formato para Etiqueta Autoadhesiva e Imprimir Prueba</string>
+    <string name="predespacho_papel">Predespacho Papel Continuo</string>
+    <string name="predespacho_etiqueta">Predespacho Etiqueta Autoadhesiva</string>
     <string name="conectar">Conectar</string>
-    <string name="imprimir_prueba_refrigerado">Imprimir Prueba Refrigerado</string>
-    <string name="imprimir_prueba_ioma">Imprimir Prueba IOMA</string>
-    <string name="imprimir_prueba_pack">Imprimir Prueba Pack</string>
-    <string name="cargar_formato_depacho">Cargar Formato</string>
+    <string name="imprimir_prueba_refrigerado">Despacho Refrigerados</string>
+    <string name="imprimir_prueba_ioma">Despacho IOMA</string>
+    <string name="imprimir_prueba_pack">Despacho Pack / Gran Volumen</string>
     <string name="horizontal">Horizontal :</string>
     <string name="vertical">Vertical :</string>
+    <string name="version">V1.0</string>
+    <string name="bajar">Bajar</string>
+    <string name="subir">Subir</string>
+    <string name="predespacho_emergencia">Predespacho Emergencia</string>
+    <string name="cerrar">Cerrar</string>
+    <string name="titulo_ayuda">Ayuda</string>
+    <string name="titulo_centrar">Centrar la etiqueta</string>
+    <string name="texto_centrar">Utilizando las flechas, se modifican los valores para el centrado de la etiqueta tanto vertical como horizontalmente. Al seleccionar alguna de las modalidades de impresión se carga en la impresora el formato y se imprime una etiqueta de prueba</string>
+    <string name="titulo_imprimir1">Despacho</string>
+    <string name="texto_imprimir1">Las tres opciones tienen cargado el mismo formulario pensado para ser usado en etiquetas autoadhesivas, pero con diferentes datos.</string>
+    <string name="titulo_imprimir2">Predespacho</string>
+    <string name="texto_imprimir2">Las opciones papel continuo y emergencia configuran la impresora para rollo de papel continuo, en cambio la restante configura la impresora para ser usada con etiquetas autoadhesivas.  IMPORTANTE: emergencia está pensada para ser usada desde Handheld con impresora fija en la zona de la tapadora, tiene un espacio en blanco de 5 centíetros en su parte superior</string>
 </resources>

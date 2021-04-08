@@ -1,183 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView  xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:backgroundTint="#FF9800">
+    android:layout_height="match_parent">
 
-<!--    <Button
-        android:id="@+id/botCargaE11"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="0dp"
-        android:backgroundTint="@color/botones"
-        android:fontFamily="monospace"
-        android:text="@string/cargar_formato_predespacho"
-        android:textColor="#F8F8F8"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PredesBotArriba"
-        tools:ignore="MissingConstraints" />-->
-
-    <ImageView
-        android:id="@+id/cuadradoBobo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/shape_cuadrado_bobo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PredesBotArriba"
-        tools:ignore="MissingConstraints" />
-
-
-    <ImageButton
-        android:id="@+id/PredesBotArriba"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
-        android:background="@drawable/selector_boton_redondeado"
-        android:contentDescription="Subir"
-        android:gravity="center"
-        android:rotation="270"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_masapp_flecha"
-        tools:ignore="MissingConstraints" />
-
-
-    <ImageButton
-        android:id="@+id/PredesBotAbajo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="0dp"
-        android:background="@drawable/selector_boton_redondeado"
-        android:contentDescription="Bajar"
-        android:rotation="90"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cuadradoBobo"
-        app:srcCompat="@drawable/ic_masapp_flecha"
-        tools:ignore="MissingConstraints" />
-
-
-    <ImageButton
-        android:id="@+id/PredesBotIzq"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/selector_boton_redondeado"
-        android:contentDescription="Mover Izquierda"
-        android:rotation="180"
-        app:layout_constraintEnd_toStartOf="@+id/cuadradoBobo"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_masapp_flecha"
-        tools:ignore="MissingConstraints" />
-
-    <ImageButton
-        android:id="@+id/PredesBotDer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="70dp"
-        android:background="@drawable/selector_boton_redondeado"
-        android:contentDescription="Mover Derecha"
-        app:layout_constraintStart_toEndOf="@+id/cuadradoBobo"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_masapp_flecha"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/PredesEjeYText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/horizontal"
-        android:textColor="#514D46"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PredesBotAbajo"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/PredesTextoY"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:text="TextView"
-        android:textColor="#514D46"
-        android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@+id/PredesEjeYText"
-        app:layout_constraintTop_toBottomOf="@+id/PredesBotAbajo"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/PredesTextoX"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:text="TextView"
-        android:textColor="#514D46"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/PredesTextoY"
-        app:layout_constraintTop_toBottomOf="@+id/PredesTextoY"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/PredesEjeXText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="2dp"
-        android:text="@string/vertical"
-        android:textColor="#514D46"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PredesEjeYText"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/botImprimeE11Continuo"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:backgroundTint="@color/botones"
-        android:textColor="#F8F8F8"
-        android:padding="8dp"
-        android:text="@string/imprimir_prueba_predespacho_continuo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PredesTextoX"
-        tools:ignore="MissingConstraints" />
+        android:layout_height="match_parent"
+        android:backgroundTint="#FF9800">
 
-    <Button
-        android:id="@+id/botImprimeE11Etiqueta"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="24dp"
-        android:backgroundTint="@color/botones"
-        android:textColor="#F8F8F8"
-        android:padding="8dp"
-        android:text="@string/imprimir_prueba_predespacho_etiqueta"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/botImprimeE11Continuo"
-        tools:ignore="MissingConstraints" />
+       <ImageView
+            android:id="@+id/cuadradoBoboPre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/shape_cuadrado_bobo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/PredesBotArriba"
+            tools:ignore="MissingConstraints" />
 
 
+        <ImageButton
+            android:id="@+id/PredesBotArriba"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/selector_boton_redondeado"
+            android:contentDescription="Subir"
+            android:gravity="center"
+            android:rotation="270"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_masapp_flecha"
+            tools:ignore="MissingConstraints" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageButton
+            android:id="@+id/PredesBotAbajo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/selector_boton_redondeado"
+            android:contentDescription="Bajar"
+            android:rotation="90"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cuadradoBoboPre"
+            app:srcCompat="@drawable/ic_masapp_flecha"
+            tools:ignore="MissingConstraints" />
+
+
+        <ImageButton
+            android:id="@+id/PredesBotIzq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/selector_boton_redondeado"
+            android:contentDescription="Mover Izquierda"
+            android:rotation="180"
+            app:layout_constraintEnd_toStartOf="@+id/cuadradoBoboPre"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_masapp_flecha"
+            tools:ignore="MissingConstraints" />
+
+        <ImageButton
+            android:id="@+id/PredesBotDer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="70dp"
+            android:background="@drawable/selector_boton_redondeado"
+            android:contentDescription="Mover Derecha"
+            app:layout_constraintStart_toEndOf="@+id/cuadradoBoboPre"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_masapp_flecha"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/PredesEjeYText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/horizontal"
+            android:textColor="@color/colorTexto"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/PredesBotAbajo"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/PredesTextoY"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="00"
+            android:textColor="@color/colorTexto"
+            android:textSize="22sp"
+            app:layout_constraintStart_toEndOf="@+id/PredesEjeYText"
+            app:layout_constraintTop_toBottomOf="@+id/PredesBotAbajo"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/PredesTextoX"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-1dp"
+            android:text="00"
+            android:textColor="@color/colorTexto"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="@+id/PredesTextoY"
+            app:layout_constraintTop_toBottomOf="@+id/PredesTextoY"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/PredesEjeXText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="-1dp"
+            android:text="@string/vertical"
+            android:textColor="@color/colorTexto"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/PredesTextoY"
+            tools:ignore="MissingConstraints" />
+
+
+        <Button
+            android:id="@+id/botImprimeE11Papel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:backgroundTint="@color/botones"
+            android:textColor="#F8F8F8"
+            android:padding="8dp"
+            android:text="@string/predespacho_papel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/PredesTextoX"
+            tools:ignore="MissingConstraints" />
+        <Button
+            android:id="@+id/botImprimeE11Etiqueta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="24dp"
+            android:backgroundTint="@color/botones"
+            android:textColor="#F8F8F8"
+            android:padding="8dp"
+            android:text="@string/predespacho_etiqueta"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/botImprimeE11Papel"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/botImprimeE11Emergencia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="24dp"
+            android:backgroundTint="@color/botones"
+            android:textColor="#F8F8F8"
+            android:padding="8dp"
+            android:text="@string/predespacho_emergencia"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/botImprimeE11Etiqueta"
+            tools:ignore="MissingConstraints" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

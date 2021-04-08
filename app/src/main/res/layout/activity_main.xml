@@ -29,7 +29,9 @@
             android:layout_below="@id/tabLayout"
             android:layout_centerInParent="true"
             android:layout_marginTop="10dp"
-            tools:layout_editor_absoluteX="8dp" />
+            tools:layout_editor_absoluteX="8dp" >
+
+        </androidx.viewpager.widget.ViewPager>
     </RelativeLayout>
 
     <LinearLayout
@@ -52,27 +54,41 @@
                     android:id="@+id/imageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_column="0"
                     app:layout_anchor="@+id/appBarLayout"
                     app:layout_anchorGravity="start|top"
                     app:srcCompat="@drawable/logomasa" />
 
                 <TextView
                     android:id="@+id/estadoConexion"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_column="1"
+                    android:layout_marginStart="30dp"
                     android:layout_marginTop="20dp"
-                    android:layout_marginEnd="10dp"
-                    android:gravity="right|bottom"
+                    android:gravity="left|bottom"
                     android:text="TextView"
                     android:textColor="#353131"
                     app:layout_constraintEnd_toEndOf="@+id/title"
                     tools:ignore="MissingConstraints,RtlHardcoded" />
 
                 <ImageButton
+                    android:id="@+id/ayuda"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="2"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/selector_boton_exit"
+                    app:layout_constraintEnd_toStartOf="@+id/cerrar"
+                    app:srcCompat="@drawable/ic_masaapp_pregunta" />
+
+
+                <ImageButton
                     android:id="@+id/cerrar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_column="2"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="5dp"
                     android:background="@drawable/selector_boton_exit"
@@ -84,8 +100,7 @@
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="0dp"
-            android:stretchColumns="1">
+            android:padding="0dp">
 
             <TableRow
                 android:layout_width="match_parent"
@@ -93,7 +108,7 @@
 
                 <Spinner
                     android:id="@+id/Impresoras"
-                    android:layout_width="match_parent"
+                    android:layout_width="240dp"
                     android:layout_height="40dp"
                     android:layout_column="0"
                     android:layout_marginStart="8dp"
@@ -122,7 +137,19 @@
             </TableRow>
 
         </TableLayout>
+
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/version"
+        android:textSize="10sp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintEnd_toEndOf= "parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="MissingConstraints,SmallSp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

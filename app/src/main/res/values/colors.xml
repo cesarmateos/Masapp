@@ -14,4 +14,6 @@
     <color name="tabSeleccion">#e9d1ff</color>
     <color name="tabNoSeleccion">#DBDBDB</color>
     <color name="botones">#76608A</color>
+    <color name="colorTexto">#514D46</color>
+    <color name="naranja">#FFAB0F</color>
 </resources>

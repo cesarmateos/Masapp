@@ -22,6 +22,7 @@ class BTHandler(activity: MainActivity) {
     lateinit var pairedDevices: Set<BluetoothDevice>
     private var bluetoothManager: BluetoothManager? = null
     var btDevice : BluetoothDevice? = null
+    var bluetoothSocket: BluetoothSocket? = null
 
     var dispositivosEmparejados: MutableList<String> = mutableListOf()
 
@@ -54,23 +55,7 @@ class BTHandler(activity: MainActivity) {
             pairedDevices.forEach { device ->
                 dispositivosEmparejados.add(device.name)
             }
-
-            evaluoConectados()
-        }
-
-    }
-
-    fun evaluoConectados(){
-        //Lleno Lista de Dispositivos Conectados
-        var dispositivosConectados: MutableList<BluetoothDevice>  = mutableListOf()
-        if (bluetoothManager != null) {
-            dispositivosConectados = bluetoothManager!!.getConnectedDevices(BluetoothProfile.GATT)
-        }
-        //Imprimo Estado de conexion en Pantalla
-        if (dispositivosConectados.isEmpty()){
             actividad.cambiarTexto("Desconectado")
-        } else{
-            actividad.cambiarTexto("Lista")
         }
     }
 
@@ -80,13 +65,13 @@ class BTHandler(activity: MainActivity) {
             var outputStream: OutputStream? = null
             if (existeBT && bluetoothAdapter!!.isEnabled) {
                 try {
-                    val bluetoothSocket = device.createRfcommSocketToServiceRecord(
+                    bluetoothSocket = device.createRfcommSocketToServiceRecord(
                             UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
                     )
                     bluetoothAdapter!!.cancelDiscovery()
                     bluetoothSocket?.connect()
                     if (bluetoothSocket!!.isConnected) {
-                        outputStream = bluetoothSocket.outputStream
+                        outputStream = bluetoothSocket!!.outputStream
                     }
                 } catch (e: Exception){
                     Log.d(TAG, "connect: ${e.message}")
@@ -96,9 +81,21 @@ class BTHandler(activity: MainActivity) {
         }
     }
 
+    fun evaluoConexion() : Boolean{
+
+        val retorno: Boolean = bluetoothSocket?.isConnected() ==true
+
+        //Imprimo Estado de conexion en Pantalla
+        if (retorno){
+            actividad.cambiarTexto("Lista")
+        } else{
+            actividad.cambiarTexto("Desconectado")
+        }
+        return retorno
+    }
 
     fun imprimir(datos: String){
-        if (existeBT) {
+        if (existeBT && evaluoConexion()) {
             actividad.cambiarTexto("Enviando datos..")
             outputStream?.run {
                 write(datos.toByteArray())

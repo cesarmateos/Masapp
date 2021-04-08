@@ -1,11 +1,14 @@
 package com.example.masapp
 
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
+import kotlin.system.exitProcess
 
 
 class MainActivity : AppCompatActivity() {
@@ -23,13 +26,14 @@ class MainActivity : AppCompatActivity() {
         val btHandler: BTHandler = BTHandler(this)
         var posicionListaImpresora: Int = 0;
 
+        //Sistema de Tabs
         tabLayout = findViewById(R.id.tabLayout)
         viewPager = findViewById(R.id.viewPager)
         tabLayout.addTab(tabLayout.newTab().setText("Despacho"))
         tabLayout.addTab(tabLayout.newTab().setText("Predespacho"))
         tabLayout.tabGravity = TabLayout.GRAVITY_FILL
         val adapter = Adaptador(this, supportFragmentManager,
-                tabLayout.tabCount,btHandler)
+                tabLayout.tabCount, btHandler)
         viewPager.adapter = adapter
         viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -42,18 +46,16 @@ class MainActivity : AppCompatActivity() {
         })
 
 
-
-
         //Menú desplegable de dispositivos
         val spinner: Spinner = findViewById(R.id.Impresoras)
         ArrayAdapter(this, android.R.layout.simple_spinner_item, btHandler.dispositivosEmparejados
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinner.adapter = adapter
+        ).also { adaptador ->
+            adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner.adapter = adaptador
         }
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View, position: Int, id: Long) {
-                posicionListaImpresora = position;
+                posicionListaImpresora = position
             }
 
             override fun onNothingSelected(parentView: AdapterView<*>?) {
@@ -61,7 +63,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        //Botón Conectar
+        //Botón conectar
         val botonConectar: Button = findViewById(R.id.botConectar)
         botonConectar.setOnClickListener {
             btHandler.conectar(posicionListaImpresora)
@@ -71,8 +73,27 @@ class MainActivity : AppCompatActivity() {
         val botonExit: ImageButton = findViewById(R.id.cerrar)
         botonExit.setOnClickListener {
             finish()
-            System.exit(0)
+            exitProcess(0)
         }
+
+        //Botón ayuda
+        val botonAyuda: ImageButton = findViewById(R.id.ayuda)
+        botonAyuda.setOnClickListener {
+            val alertDialogBuilder = AlertDialog.Builder(this)
+            val inflater = layoutInflater
+            alertDialogBuilder.setPositiveButton("Cerrar")
+            { dialog, id ->
+                dialog.cancel();
+            }
+            alertDialogBuilder.setView(inflater.inflate(R.layout.ayuda, null))
+            val dialogo = alertDialogBuilder.create()
+            dialogo.show()
+            val positiveButton = dialogo.getButton(AlertDialog.BUTTON_POSITIVE)
+            positiveButton.setTextColor(Color.parseColor("#FFAB0F"))
+
+        }
+
+
     }
 
     fun cambiarTexto(texto: String){
