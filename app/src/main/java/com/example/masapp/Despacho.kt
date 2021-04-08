@@ -112,9 +112,7 @@ class Despacho(btHandler: BTHandler):Fragment() {
     }
 
     private fun cargarFormato(){
-        if(!blueTooth.logoCargado){
-            blueTooth.mandarLogo()
-        }
+        blueTooth.mandarLogo()
         if(this.huboCambios){
             if (blueTooth.btDevice?.name?.take(3).equals("RP4")) {
                 blueTooth.imprimir("<STX><ESC>C<ETX>\n" +

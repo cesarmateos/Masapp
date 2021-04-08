@@ -109,9 +109,7 @@ class Predespacho(btHandler: BTHandler): Fragment() {
     }
 
     private fun cargarFormatoGeneral(){
-        if (!blueTooth.logoCargado) {
-            blueTooth.mandarLogo()
-        }
+        blueTooth.mandarLogo()
         blueTooth.imprimir("<STX><ESC>C<ETX>\n" +
                 "<STX><ESC>P<ETX>\n" +
                 "<STX>E11;F11;<ETX>\n" +
@@ -138,9 +136,7 @@ class Predespacho(btHandler: BTHandler): Fragment() {
     }
 
     private fun cargarFormatoSatoContinuo(){
-        if (!blueTooth.logoCargado) {
-            blueTooth.mandarLogo()
-        }
+        blueTooth.mandarLogo()
         blueTooth.imprimir("<STX><ESC>C<ETX>\n" +
                 "<STX><ESC>P<ETX>\n" +
                 "<STX>E11;F11;<ETX>\n" +
@@ -168,9 +164,7 @@ class Predespacho(btHandler: BTHandler): Fragment() {
     }
 
     private fun cargarFormatoEmergencia(){
-        if (!blueTooth.logoCargado) {
-            blueTooth.mandarLogo()
-        }
+        blueTooth.mandarLogo()
         blueTooth.imprimir("<STX><ESC>C<ETX>\n" +
                 "<STX><ESC>P<ETX>\n" +
                 "<STX>E11;F11;<ETX>\n" +
