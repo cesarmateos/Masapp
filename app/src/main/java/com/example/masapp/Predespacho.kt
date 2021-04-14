@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 class Predespacho(btHandler: BTHandler): Fragment() {
 
     private val blueTooth: BTHandler = btHandler
-    private val multiplicador = 3
+    private val multiplicador = 4
     private var ejeX: Int = 0
     private var ejeY: Int = 0
 

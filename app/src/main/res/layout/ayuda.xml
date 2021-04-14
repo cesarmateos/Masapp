@@ -108,21 +108,5 @@
         app:layout_constraintTop_toBottomOf="@+id/TituloImprimir2"
         tools:ignore="MissingConstraints" />
 
-   <Button
-        android:id="@+id/botCerrarAyuda"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="0dp"
-        android:backgroundTint="@color/botones"
-        android:textColor="#F8F8F8"
-        android:paddingEnd="25dp"
-        android:paddingStart="25dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextoImprimir2"
-        android:text="Cerrar"
-        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
