@@ -19,8 +19,6 @@ class Despacho(btHandler: BTHandler):Fragment() {
     private lateinit var textoX : TextView
     private lateinit var textoY : TextView
 
-    private var huboCambios: Boolean = true
-
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -113,7 +111,6 @@ class Despacho(btHandler: BTHandler):Fragment() {
 
     private fun cargarFormato(){
         blueTooth.mandarLogo()
-        if(huboCambios){
             if (blueTooth.btDevice?.name?.take(3).equals("RP4")) {
                 blueTooth.imprimir("<STX><ESC>C<ETX>\n" +
                         "<STX><ESC>P<ETX>\n" +
@@ -124,17 +121,17 @@ class Despacho(btHandler: BTHandler):Fragment() {
                         "<STX>H8;f3;o" + (445+ejeX*multiplicador) + "," +(185+ejeY*multiplicador)+ ";c26;k12;d0,10;<ETX>\n" +
                         "<STX>H5;f3;o" + (410+ejeX*multiplicador) + "," +(185+ejeY*multiplicador)+ ";c26;b0;k11;d3,Ped:<ETX>\n" +
                         "<STX>H10;f3;o" + (410+ejeX*multiplicador) + "," +(290+ejeY*multiplicador)+ ";c26;b0;k11;d0,8;<ETX>\n" +
-                        "<STX>U31;f3;o" + (475+ejeX*multiplicador) + "," +(620+ejeY*multiplicador)+ ";c2;w1;h1;<ETX>\n" +
-                        "<STX>H26;f3;o" + (425+ejeX*multiplicador) + "," +(647+ejeY*multiplicador)+ ";c26;b0;k6;d3,Monroe Americana<ETX>\n" +
+                        "<STX>U31;f3;o" + (475+ejeX*multiplicador) + "," +(600+ejeY*multiplicador)+ ";c2;w1;h1;<ETX>\n" +
+                        "<STX>H26;f3;o" + (425+ejeX*multiplicador) + "," +(627+ejeY*multiplicador)+ ";c26;b0;k6;d3,Monroe Americana<ETX>\n" +
                         "<STX>H15;f3;o" + (365+ejeX*multiplicador) + "," +(185+ejeY*multiplicador)+ ";c26;b0;k14;d0,26;<ETX>\n" +
                         "<STX>H16;f3;o" + (325+ejeX*multiplicador) + "," +(185+ejeY*multiplicador)+ ";c26;b0;k14;d0,26;<ETX>\n" +
                         "<STX>H25;f3;o" + (260+ejeX*multiplicador) + "," +(310+ejeY*multiplicador)+ ";c26;b0;k12;d0,15;<ETX>\n" +
                         "<STX>H17;f3;o" + (220+ejeX*multiplicador) + "," +(40+ejeY*multiplicador)+ ";c26;b0;k10;d0,50;<ETX>\n" +
-                        "<STX>H30;f3;o" + (160+ejeX*multiplicador) + "," +(60+ejeY*multiplicador)+ ";c26;b0;k8;d3,Bulto<ETX>\n" +
-                        "<STX>H32;f3;o" + (160+ejeX*multiplicador) + "," +(270+ejeY*multiplicador)+ ";c26;b0;k8;d3,Turno<ETX>\n" +
-                        "<STX>H34;f3;o" + (160+ejeX*multiplicador) + "," +(500+ejeY*multiplicador)+ ";c26;b0;k8;d3,Radio<ETX>\n" +
-                        "<STX>H36;f3;o" + (160+ejeX*multiplicador) + "," +(740+ejeY*multiplicador)+ ";c26;b0;k8;d3,Orden<ETX>\n" +
-                        "<STX>H21;f3;o" + (145+ejeX*multiplicador) + "," +(30+ejeY*multiplicador)+ ";c26;b0;k19;d0,28;<ETX>\n" +
+                        "<STX>H30;f3;o" + (162+ejeX*multiplicador) + "," +(60+ejeY*multiplicador)+ ";c26;b0;k8;d3,Bulto<ETX>\n" +
+                        "<STX>H32;f3;o" + (162+ejeX*multiplicador) + "," +(250+ejeY*multiplicador)+ ";c26;b0;k8;d3,Turno<ETX>\n" +
+                        "<STX>H34;f3;o" + (162+ejeX*multiplicador) + "," +(450+ejeY*multiplicador)+ ";c26;b0;k8;d3,Radio<ETX>\n" +
+                        "<STX>H36;f3;o" + (162+ejeX*multiplicador) + "," +(685+ejeY*multiplicador)+ ";c26;b0;k8;d3,Orden<ETX>\n" +
+                        "<STX>H21;f3;o" + (145+ejeX*multiplicador) + "," +(35+ejeY*multiplicador)+ ";c26;b0;k18;d0,28;<ETX>\n" +
                         "<STX>H13;f3;o" + (68+ejeX*multiplicador) + "," +(50+ejeY*multiplicador)+ ";c26;b0;k14;d0,30;<ETX>\n" +
                         "<STX>H12;f3;o" + (30+ejeX*multiplicador) + "," +(50+ejeY*multiplicador)+ ";c26;b0;k10;d0,10;<ETX>\n" +
                         "<STX>R<ETX>")
@@ -148,8 +145,8 @@ class Despacho(btHandler: BTHandler):Fragment() {
                         "<STX>H8;f3;o" + (450+ejeX*multiplicador) + "," +(185+ejeY*multiplicador)+ ";c26;k12;d0,10;<ETX>\n" +
                         "<STX>H5;f3;o" + (420+ejeX*multiplicador) + "," +(185+ejeY*multiplicador)+ ";c26;b0;k11;d3,Ped:<ETX>\n" +
                         "<STX>H10;f3;o" + (420+ejeX*multiplicador) + "," +(290+ejeY*multiplicador)+ ";c26;b0;k11;d0,8;<ETX>\n" +
-                        "<STX>U31;f3;o" + (475+ejeX*multiplicador) + "," +(580+ejeY*multiplicador)+ ";c2;w1;h1;<ETX>\n" +
-                        "<STX>H26;f3;o" + (425+ejeX*multiplicador) + "," +(607+ejeY*multiplicador)+ ";c26;b0;k6;d3,Monroe Americana<ETX>\n" +
+                        "<STX>U31;f3;o" + (475+ejeX*multiplicador) + "," +(585+ejeY*multiplicador)+ ";c2;w1;h1;<ETX>\n" +
+                        "<STX>H26;f3;o" + (425+ejeX*multiplicador) + "," +(612+ejeY*multiplicador)+ ";c26;b0;k6;d3,Monroe Americana<ETX>\n" +
                         "<STX>H15;f3;o" + (370+ejeX*multiplicador) + "," +(185+ejeY*multiplicador)+ ";c26;b0;k14;d0,26;<ETX>\n" +
                         "<STX>H16;f3;o" + (330+ejeX*multiplicador) + "," +(185+ejeY*multiplicador)+ ";c26;b0;k14;d0,26;<ETX>\n" +
                         "<STX>H25;f3;o" + (260+ejeX*multiplicador) + "," +(310+ejeY*multiplicador)+ ";c26;b0;k12;d0,15;<ETX>\n" +
@@ -163,21 +160,16 @@ class Despacho(btHandler: BTHandler):Fragment() {
                         "<STX>H12;f3;o" + (30+ejeX*multiplicador) + "," +(50+ejeY*multiplicador)+ ";c26;b0;k10;d0,10;<ETX>\n" +
                         "<STX>R<ETX>")
             }
-            huboCambios = false
-        }
-
     }
 
     private fun modificarX(cantidad: Int){
         ejeX += cantidad
         textoX.text = ejeX.toString()
-        huboCambios = true
     }
 
     private fun modificarY(cantidad: Int){
         ejeY += cantidad
         textoY.text = ejeY.toString()
-        huboCambios = true
     }
 
 }

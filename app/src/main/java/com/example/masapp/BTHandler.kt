@@ -12,6 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.IOException
 
 private const val TAG = "MainActivity"
 
@@ -26,7 +27,7 @@ class BTHandler(activity: MainActivity) {
 
     var dispositivosEmparejados: MutableList<String> = mutableListOf()
 
-    private var existeBT: Boolean = false
+    var existeBT: Boolean = false
     private var logoCargado: Boolean = false
 
     private var outputStream: OutputStream? = null
@@ -45,6 +46,7 @@ class BTHandler(activity: MainActivity) {
                 val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
                 val REQUEST_ENABLE_BT = 1
                 activity.startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT)
+                actividad.cargarDispositivos(this)
             }
             bluetoothManager = activity.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
 
@@ -107,6 +109,7 @@ class BTHandler(activity: MainActivity) {
 
     fun conectar(posicion: Int){
         if(existeBT){
+            logoCargado = false
             btDevice = pairedDevices.elementAt(posicion)
             GlobalScope.launch (Dispatchers.Main) {
                 if(outputStream == null) {
@@ -116,6 +119,26 @@ class BTHandler(activity: MainActivity) {
                     }
                 }
             }
+        }
+    }
+
+    fun desconectar(){
+        if(existeBT) {
+            actividad.cambiarTexto("Desconectando..")
+            outputStream = null
+
+            try {
+                outputStream?.close()
+            } catch (e: IOException) {
+            }
+
+            try {
+                bluetoothSocket?.close()
+            } catch (e: IOException) {
+            }
+
+            bluetoothSocket = null
+            actividad.cambiarTexto("Desconectado")
         }
     }
 

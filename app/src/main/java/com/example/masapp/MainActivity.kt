@@ -16,14 +16,17 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tabLayout: TabLayout
     lateinit var viewPager: ViewPager
     private lateinit var textoEstadoConexion : TextView
+    private var estadoBotonConectar = true
+    private lateinit var spinner: Spinner
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         textoEstadoConexion = findViewById(R.id.estadoConexion) as TextView
-
         val btHandler: BTHandler = BTHandler(this)
+
         var posicionListaImpresora: Int = 0;
 
         //Sistema de Tabs
@@ -47,12 +50,8 @@ class MainActivity : AppCompatActivity() {
 
 
         //Menú desplegable de dispositivos
-        val spinner: Spinner = findViewById(R.id.Impresoras)
-        ArrayAdapter(this, android.R.layout.simple_spinner_item, btHandler.dispositivosEmparejados
-        ).also { adaptador ->
-            adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinner.adapter = adaptador
-        }
+        spinner = findViewById(R.id.Impresoras)
+        cargarDispositivos(btHandler)
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View, position: Int, id: Long) {
                 posicionListaImpresora = position
@@ -65,9 +64,23 @@ class MainActivity : AppCompatActivity() {
 
         //Botón conectar
         val botonConectar: Button = findViewById(R.id.botConectar)
-        botonConectar.setOnClickListener {
-            btHandler.conectar(posicionListaImpresora)
+        if(btHandler.existeBT){
+            botonConectar.setOnClickListener {
+                if(estadoBotonConectar){
+                    btHandler.conectar(posicionListaImpresora)
+                    botonConectar.text = "Desconectar"
+                    botonConectar.textSize = 12.0F
+                    estadoBotonConectar = false
+                }else{
+                    btHandler.desconectar()
+                    botonConectar.text = "Conectar"
+                    botonConectar.textSize = 14.0F
+                    estadoBotonConectar = true
+
+                }
+            }
         }
+
 
         //Botón exit
         val botonExit: ImageButton = findViewById(R.id.cerrar)
@@ -94,6 +107,14 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    fun cargarDispositivos(btHandler:BTHandler){
+        ArrayAdapter(this, android.R.layout.simple_spinner_item, btHandler.dispositivosEmparejados
+        ).also { adaptador ->
+            adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner.adapter = adaptador
+        }
     }
 
     fun cambiarTexto(texto: String){

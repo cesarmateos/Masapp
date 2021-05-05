@@ -134,6 +134,7 @@
                     android:textAlignment="center"
                     android:textColorHighlight="#673AB7"
                     tools:ignore="RtlCompat" />
+
             </TableRow>
 
         </TableLayout>
