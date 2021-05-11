@@ -8,14 +8,14 @@
     <string name="imprimir_prueba_pack">Despacho Pack / Gran Volumen</string>
     <string name="horizontal">Horizontal :</string>
     <string name="vertical">Vertical :</string>
-    <string name="version">V1.1</string>
+    <string name="version">V1.2</string>
     <string name="bajar">Bajar</string>
     <string name="subir">Subir</string>
     <string name="predespacho_emergencia">Predespacho Emergencia</string>
     <string name="cerrar">Cerrar</string>
     <string name="titulo_ayuda">Ayuda</string>
-    <string name="titulo_centrar">Centrar la etiqueta</string>
-    <string name="texto_centrar">Utilizando las flechas, se modifican los valores para el centrado de la etiqueta tanto vertical como horizontalmente. Al seleccionar alguna de las modalidades de impresión se carga en la impresora el formato y se imprime una etiqueta de prueba</string>
+    <string name="titulo_centrar">Centrado y dirección de la etiqueta</string>
+    <string name="texto_centrar">Utilizando las flechas, se modifican los valores para el centrado de la etiqueta tanto vertical como horizontalmente. El botón switch Normal/Invertida configura la dirección en la que se va a imprimir la etiqueta.</string>
     <string name="titulo_imprimir1">Despacho</string>
     <string name="texto_imprimir1">Las tres opciones tienen cargado el mismo formulario pensado para ser usado en etiquetas autoadhesivas, pero con diferentes datos.</string>
     <string name="titulo_imprimir2">Predespacho</string>

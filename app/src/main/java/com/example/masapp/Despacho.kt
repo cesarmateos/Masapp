@@ -1,13 +1,18 @@
 package com.example.masapp
 
+import android.R.attr.gravity
+import android.graphics.Color
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.ToggleButton
 import androidx.fragment.app.Fragment
+
 
 class Despacho(btHandler: BTHandler):Fragment() {
 
@@ -18,6 +23,7 @@ class Despacho(btHandler: BTHandler):Fragment() {
 
     private lateinit var textoX : TextView
     private lateinit var textoY : TextView
+    private lateinit var switchGire : ToggleButton
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -106,60 +112,95 @@ class Despacho(btHandler: BTHandler):Fragment() {
             modificarY(-1)
         }
 
+        switchGire= vistaRetorno.findViewById(R.id.switchGire)
+
+        switchGire.setPadding(50, 0, 0, 0)
+        switchGire.setOnClickListener{
+            if(switchGire.isChecked){
+                switchGire.setPadding(0, 0, 50, 0)
+                switchGire.setTextColor(Color.parseColor("#FFFFFF"))
+            }else{
+                switchGire.setPadding(50, 0, 0, 0)
+                switchGire.setTextColor(Color.parseColor("#000000"))
+
+            }
+
+        }
+
         return vistaRetorno
     }
 
     private fun cargarFormato(){
         blueTooth.mandarLogo()
-            if (blueTooth.btDevice?.name?.take(3).equals("RP4")) {
-                blueTooth.imprimir("<STX><ESC>C<ETX>\n" +
-                        "<STX><ESC>P<ETX>\n" +
-                        "<STX>E1;F1;<ETX>\n" +
-                        "<STX>B11;f2;o" + (460+ejeX*multiplicador) + "," +(130+ejeY*multiplicador)+ ";c2,0;w2;h90;i1;d0,10;<ETX>\n" +
-                        "<STX>I11;f2;o" + (460+ejeX*multiplicador) + "," +(162+ejeY*multiplicador)+ ";c20;h1;w1;b0;<ETX>\n" +
-                        "<STX>H6;f3;o" + (480+ejeX*multiplicador) + "," +(185+ejeY*multiplicador)+ ";c26;b0;k11;d0,18;<ETX>\n" +
-                        "<STX>H8;f3;o" + (445+ejeX*multiplicador) + "," +(185+ejeY*multiplicador)+ ";c26;k12;d0,10;<ETX>\n" +
-                        "<STX>H5;f3;o" + (410+ejeX*multiplicador) + "," +(185+ejeY*multiplicador)+ ";c26;b0;k11;d3,Ped:<ETX>\n" +
-                        "<STX>H10;f3;o" + (410+ejeX*multiplicador) + "," +(290+ejeY*multiplicador)+ ";c26;b0;k11;d0,8;<ETX>\n" +
-                        "<STX>U31;f3;o" + (475+ejeX*multiplicador) + "," +(600+ejeY*multiplicador)+ ";c2;w1;h1;<ETX>\n" +
-                        "<STX>H26;f3;o" + (425+ejeX*multiplicador) + "," +(627+ejeY*multiplicador)+ ";c26;b0;k6;d3,Monroe Americana<ETX>\n" +
-                        "<STX>H15;f3;o" + (365+ejeX*multiplicador) + "," +(185+ejeY*multiplicador)+ ";c26;b0;k14;d0,26;<ETX>\n" +
-                        "<STX>H16;f3;o" + (325+ejeX*multiplicador) + "," +(185+ejeY*multiplicador)+ ";c26;b0;k14;d0,26;<ETX>\n" +
-                        "<STX>H25;f3;o" + (260+ejeX*multiplicador) + "," +(310+ejeY*multiplicador)+ ";c26;b0;k12;d0,15;<ETX>\n" +
-                        "<STX>H17;f3;o" + (220+ejeX*multiplicador) + "," +(40+ejeY*multiplicador)+ ";c26;b0;k10;d0,50;<ETX>\n" +
-                        "<STX>H30;f3;o" + (162+ejeX*multiplicador) + "," +(60+ejeY*multiplicador)+ ";c26;b0;k8;d3,Bulto<ETX>\n" +
-                        "<STX>H32;f3;o" + (162+ejeX*multiplicador) + "," +(250+ejeY*multiplicador)+ ";c26;b0;k8;d3,Turno<ETX>\n" +
-                        "<STX>H34;f3;o" + (162+ejeX*multiplicador) + "," +(450+ejeY*multiplicador)+ ";c26;b0;k8;d3,Radio<ETX>\n" +
-                        "<STX>H36;f3;o" + (162+ejeX*multiplicador) + "," +(685+ejeY*multiplicador)+ ";c26;b0;k8;d3,Orden<ETX>\n" +
-                        "<STX>H21;f3;o" + (145+ejeX*multiplicador) + "," +(35+ejeY*multiplicador)+ ";c26;b0;k18;d0,28;<ETX>\n" +
-                        "<STX>H13;f3;o" + (68+ejeX*multiplicador) + "," +(50+ejeY*multiplicador)+ ";c26;b0;k14;d0,30;<ETX>\n" +
-                        "<STX>H12;f3;o" + (30+ejeX*multiplicador) + "," +(50+ejeY*multiplicador)+ ";c26;b0;k10;d0,10;<ETX>\n" +
-                        "<STX>R<ETX>")
-            } else {
-                blueTooth.imprimir("<STX><ESC>C<ETX>\n" +
-                        "<STX><ESC>P<ETX>\n" +
-                        "<STX>E1;F1;<ETX>\n" +
-                        "<STX>B11;f2;o" + (460+ejeX*multiplicador) + "," +(130+ejeY*multiplicador)+ ";c2,0;w2;h90;i1;d0,10;<ETX>\n" +
-                        "<STX>I11;f2;o" + (460+ejeX*multiplicador) + "," +(162+ejeY*multiplicador)+ ";c20;h1;w1;b0;<ETX>\n" +
-                        "<STX>H6;f3;o" + (480+ejeX*multiplicador) + "," +(185+ejeY*multiplicador)+ ";c26;b0;k11;d0,18;<ETX>\n" +
-                        "<STX>H8;f3;o" + (450+ejeX*multiplicador) + "," +(185+ejeY*multiplicador)+ ";c26;k12;d0,10;<ETX>\n" +
-                        "<STX>H5;f3;o" + (420+ejeX*multiplicador) + "," +(185+ejeY*multiplicador)+ ";c26;b0;k11;d3,Ped:<ETX>\n" +
-                        "<STX>H10;f3;o" + (420+ejeX*multiplicador) + "," +(290+ejeY*multiplicador)+ ";c26;b0;k11;d0,8;<ETX>\n" +
-                        "<STX>U31;f3;o" + (475+ejeX*multiplicador) + "," +(585+ejeY*multiplicador)+ ";c2;w1;h1;<ETX>\n" +
-                        "<STX>H26;f3;o" + (425+ejeX*multiplicador) + "," +(612+ejeY*multiplicador)+ ";c26;b0;k6;d3,Monroe Americana<ETX>\n" +
-                        "<STX>H15;f3;o" + (370+ejeX*multiplicador) + "," +(185+ejeY*multiplicador)+ ";c26;b0;k14;d0,26;<ETX>\n" +
-                        "<STX>H16;f3;o" + (330+ejeX*multiplicador) + "," +(185+ejeY*multiplicador)+ ";c26;b0;k14;d0,26;<ETX>\n" +
-                        "<STX>H25;f3;o" + (260+ejeX*multiplicador) + "," +(310+ejeY*multiplicador)+ ";c26;b0;k12;d0,15;<ETX>\n" +
-                        "<STX>H17;f3;o" + (220+ejeX*multiplicador) + "," +(40+ejeY*multiplicador)+ ";c26;b0;k10;d0,50;<ETX>\n" +
-                        "<STX>H30;f3;o" + (160+ejeX*multiplicador) + "," +(70+ejeY*multiplicador)+ ";c26;b0;k8;d3,Bulto<ETX>\n" +
-                        "<STX>H32;f3;o" + (160+ejeX*multiplicador) + "," +(260+ejeY*multiplicador)+ ";c26;b0;k8;d3,Turno<ETX>\n" +
-                        "<STX>H34;f3;o" + (160+ejeX*multiplicador) + "," +(470+ejeY*multiplicador)+ ";c26;b0;k8;d3,Radio<ETX>\n" +
-                        "<STX>H36;f3;o" + (160+ejeX*multiplicador) + "," +(680+ejeY*multiplicador)+ ";c26;b0;k8;d3,Orden<ETX>\n" +
-                        "<STX>H21;f3;o" + (145+ejeX*multiplicador) + "," +(40+ejeY*multiplicador)+ ";c26;b0;k17;d0,28;<ETX>\n" +
-                        "<STX>H13;f3;o" + (68+ejeX*multiplicador) + "," +(50+ejeY*multiplicador)+ ";c26;b0;k14;d0,30;<ETX>\n" +
-                        "<STX>H12;f3;o" + (30+ejeX*multiplicador) + "," +(50+ejeY*multiplicador)+ ";c26;b0;k10;d0,10;<ETX>\n" +
-                        "<STX>R<ETX>")
+        lateinit var posicionesEnX:IntArray
+        lateinit var posicionesEnY:IntArray
+        lateinit var tamanioTexto:IntArray
+        lateinit var orientacion:IntArray
+
+        var modificadorPosicionX:Int
+        var modificadorPosicionY:Int
+
+        if(switchGire.isChecked){
+            modificadorPosicionX = - ejeX * multiplicador
+            modificadorPosicionY = - ejeY * multiplicador
+            orientacion = intArrayOf(4,1)
+        }else{
+            modificadorPosicionX = + ejeX * multiplicador
+            modificadorPosicionY = + ejeY * multiplicador
+            orientacion = intArrayOf(2,3)
+        }
+
+        if (blueTooth.btDevice?.name?.take(3).equals("RP4")) {
+            tamanioTexto = intArrayOf(18)
+            if (switchGire.isChecked) {
+                posicionesEnX = intArrayOf(30, 30, 10, 45, 80, 80, 15, 65, 125, 165, 230, 270, 328, 328, 328, 328, 345, 422, 460)
+                posicionesEnY = intArrayOf(670, 638, 610, 610, 610, 500, 230, 203, 610, 610, 490, 760, 730, 540, 340, 115, 765, 750, 750)
+            }else{
+                posicionesEnX = intArrayOf(460,460,480,445,410,410,475,425,365,325,260,220,162,162,162,162,145,68,30)
+                posicionesEnY = intArrayOf(130,162,185,185,185,290,600,627,185,185,310,40,60,250,450,685,35,50,50)
             }
+
+        } else {
+            tamanioTexto = intArrayOf(17)
+            if (switchGire.isChecked) {
+                posicionesEnX = intArrayOf(30, 30, 10, 40, 70, 70, 15, 65, 120, 160, 230, 270, 330, 330, 330, 330, 345, 422, 460)
+                posicionesEnY = intArrayOf(670, 638, 610, 610, 610, 500, 215, 188, 610, 610, 490, 760, 730, 540, 340, 110, 760, 750, 750)
+            } else {
+                posicionesEnX = intArrayOf(460, 460, 480, 450, 420, 420, 475, 425, 370, 330, 260, 220, 160, 160, 160, 160, 145, 68, 30)
+                posicionesEnY = intArrayOf(130, 162, 185, 185, 185, 290, 585, 612, 185, 185, 310, 40, 70, 260, 470, 680, 40, 50, 50)
+            }
+        }
+
+        for (posicion in posicionesEnX.indices) {
+            posicionesEnX[posicion] = posicionesEnX[posicion] + modificadorPosicionX
+        }
+        for (posicion in posicionesEnY.indices) {
+            posicionesEnY[posicion] = posicionesEnY[posicion] + modificadorPosicionY
+        }
+
+        blueTooth.imprimir("<STX><ESC>C<ETX>\n" +
+                "<STX><ESC>P<ETX>\n" +
+                "<STX>E1;F1;<ETX>\n" +
+                "<STX>B11;f" + orientacion[0] + ";o" + posicionesEnX[0] + "," + posicionesEnY[0] + ";c2,0;w2;h90;i1;d0,10;<ETX>\n" +
+                "<STX>I11;f" + orientacion[0] + ";o" + posicionesEnX[1] + "," + posicionesEnY[1] + ";c20;h1;w1;b0;<ETX>\n" +
+                "<STX>H6;f" + orientacion[1] + ";o" + posicionesEnX[2] + "," + posicionesEnY[2] + ";c26;b0;k11;d0,18;<ETX>\n" +
+                "<STX>H8;f" + orientacion[1] + ";o" + posicionesEnX[3] + "," + posicionesEnY[3] + ";c26;k12;d0,10;<ETX>\n" +
+                "<STX>H5;f" + orientacion[1] + ";o" + posicionesEnX[4] + "," + posicionesEnY[4] + ";c26;b0;k11;d3,Ped:<ETX>\n" +
+                "<STX>H10;f" + orientacion[1] + ";o" + posicionesEnX[5] + "," + posicionesEnY[5] + ";c26;b0;k11;d0,8;<ETX>\n" +
+                "<STX>U31;f" + orientacion[1] + ";o" + posicionesEnX[6] + "," + posicionesEnY[6] + ";c2;w1;h1;<ETX>\n" +
+                "<STX>H26;f" + orientacion[1] + ";o" + posicionesEnX[7] + "," + posicionesEnY[7] + ";c26;b0;k6;d3,Monroe Americana<ETX>\n" +
+                "<STX>H15;f" + orientacion[1] + ";o" + posicionesEnX[8] + "," + posicionesEnY[8] + ";c26;b0;k14;d0,26;<ETX>\n" +
+                "<STX>H16;f" + orientacion[1] + ";o" + posicionesEnX[9] + "," + posicionesEnY[9] + ";c26;b0;k14;d0,26;<ETX>\n" +
+                "<STX>H25;f" + orientacion[1] + ";o" + posicionesEnX[10] + "," + posicionesEnY[10] + ";c26;b0;k12;d0,15;<ETX>\n" +
+                "<STX>H17;f" + orientacion[1] + ";o" + posicionesEnX[11] + "," + posicionesEnY[11] + ";c26;b0;k10;d0,50;<ETX>\n" +
+                "<STX>H30;f" + orientacion[1] + ";o" + posicionesEnX[12] + "," + posicionesEnY[12] + ";c26;b0;k8;d3,Bulto<ETX>\n" +
+                "<STX>H32;f" + orientacion[1] + ";o" + posicionesEnX[13] + "," + posicionesEnY[13] + ";c26;b0;k8;d3,Turno<ETX>\n" +
+                "<STX>H34;f" + orientacion[1] + ";o" + posicionesEnX[14] + "," + posicionesEnY[14] + ";c26;b0;k8;d3,Radio<ETX>\n" +
+                "<STX>H36;f" + orientacion[1] + ";o" + posicionesEnX[15] + "," + posicionesEnY[15] + ";c26;b0;k8;d3,Orden<ETX>\n" +
+                "<STX>H21;f" + orientacion[1] + ";o" + posicionesEnX[16] + "," + posicionesEnY[16] + ";c26;b0;k" + tamanioTexto[0] + ";d0,28;<ETX>\n" +
+                "<STX>H13;f" + orientacion[1] + ";o" + posicionesEnX[17] + "," + posicionesEnY[17] + ";c26;b0;k14;d0,30;<ETX>\n" +
+                "<STX>H12;f" + orientacion[1] + ";o" + posicionesEnX[18] + "," + posicionesEnY[18] + ";c26;b0;k10;d0,10;<ETX>\n" +
+                "<STX>R<ETX>")
     }
 
     private fun modificarX(cantidad: Int){
